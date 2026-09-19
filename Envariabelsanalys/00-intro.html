@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<!-- KaTeX JS & Auto-render extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Render elements matching data-math="block"
+    document.querySelectorAll('[data-math="block"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: true,
+        throwOnError: false
+        });
+    });
+    document.querySelectorAll('[data-math="inline"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: false,
+        throwOnError: false
+        });
+    });
+    });
+</script>
+
+<style>
+/* Modern Reset & Root Variables */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: hsl(215, 0%, 0%);
+  --accent-color1: hsl(221, 83%, 53%);
+  --accent-color2: hsl(28, 83%, 53%);
+  --accent-light: hsl(221, 0%, 95%);
+  --border-color: #e2e8f0;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-color1);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Treat top H1 as the main document title */
+h1:first-of-type {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Body Text & Paragraphs */
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Lists */
+ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+li p {
+  margin-bottom: 0;
+}
+
+/* KaTeX Formatting Enhancements */
+
+/* Block Equations */
+[data-math="block"] {
+  display: block;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+/* Inline Math Spacing Fixes */
+[data-math="inline"] {
+  padding: 0 2px;
+}
+
+.theorem,
+.definition {
+    background-color: var(--accent-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
+
+.theorem {
+    border-left: 4px solid var(--accent-color1);
+}
+
+.definition {
+    border-left: 4px solid var(--accent-color2);
+}
+
+/* Responsive view for mobile screens */
+@media (max-width: 840px) {
+  body {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 1.25rem;
+  }
+}
+
+
+img {
+  min-height: 200px;
+}
+</style></head>
+<body>
+    <h1 id="node-0">Gränsvärde och kontinuitet</h1>
+    <p>De reella talen är fullständiga för additions, subtraktion, multiplikation och division. Denna kurs handlar till stor del om de reella talen. </p>
+    <h2 id="node-1">Absolutbeloppsfunktionen</h2>
+    <p>Absolutbeloppsfunktionen är definerad enligt</p>
+    <div data-math="block"> 
+    |x| = 
+
+    \begin{cases}
+      x &amp; \text{om } x \ge 0 \\
+      -x &amp; \text{om } x &lt; 0 \\
+    \end{cases} 
+
+    </div>
+    <p> </p>
+    <p>och beskriver därmed avståndet till ett tal. Det finns två metoder för att lösa likheter och olikheter med absolutbelopp. Den matematiskt rigorösa metoden går ut på att dela upp olikheten enligt definitionen i två olika intervall, men det går även att använda sig av en grafisk tolkning där <span data-math="inline">|x - a|</span> anger avståndet till talet <span data-math="inline">a</span>. </p>
+    <p>Det går även att använda sig av följande formler, som även fungerar för med strikta gränser:</p>
+    <ul>
+        <li>
+            <p> <span data-math="inline">|x - a| = D \implies x_1 = a - D, x_2 a + D</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">|x - a| &lt; D \implies x \in (a - D, a + D)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">|x - a| &gt; D \implies x \in (-\infty, a - D) \cup (a + D, \infty)</span></p>
+        </li>
+    </ul>
+    <p>Absolutbeloppet har följande egenskaper:</p>
+    <ul>
+        <li>
+            <p> <span data-math="inline">|-a| = |a|</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">|ab| = |a||b| \text{ och } |\frac{a}{b}| = \frac{|a|}{|b|}</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">|a \pm b| \le |a| + |b|</span></p>
+        </li>
+    </ul>
+    <h2 id="node-2">Funktioner</h2>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Låt <span data-math="inline">D</span> och <span data-math="inline">S</span> vara mängder. En funktion <span data-math="inline">f: D \to S</span> är en regel som tilldelar ett värde <span data-math="inline">f(x)</span> i mängd <span data-math="inline">S</span> ett unikt element i mängd <span data-math="inline">D</span>.</p>
+    </div>
+    <p>I definitionen ovan är <span data-math="inline">D</span> definitionsmängden och <span data-math="inline">S</span> är målmängden. Målmängden är de värden som funktionen teoretiskt kan antag medan värdemängden <span data-math="inline">R(f)</span> är mängden av de faktiska värden som funktionen kan antag. I denna kurs är <span data-math="inline">D, S, R(f) \subseteq R</span>.</p>
+    <p>Exempelvis kan vi definiera funktionen <span data-math="inline">f(x): R\to R = x^2</span>. Funktionen har per definition målmängden <span data-math="inline">R</span> men  värdemängden är endast <span data-math="inline">R^+</span> då <span data-math="inline">x^2 \ge 0</span>.  </p>
+    <p>För funktioner där definitionsmängden inte är given antas definitionsmängden enligt domainconventionen där funktionen ger ett meningsfullt värde. Exempelvis bör division med 0 undvikas. </p>
+    <h3 id="node-3">Jämna och udda funktioner</h3>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Funktionen <span data-math="inline">f(x)</span> är jämn om <span data-math="inline">f(-x) = f(x)</span></p>
+        <p>Funktionen <span data-math="inline">f(x)</span> är udda om <span data-math="inline">f(-x) \neq -f(x)</span></p>
+    </div>
+    <p>Jämnafunktioner är symmetriska över yaxeln och udda funktioner är speglade i origo. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Jämna och udda funktioners egenskaper).</strong></p>
+        <p>Produkten av två udda funktioner är udda</p>
+        <p>Produkten av jämn och udda funktioner är jämn  </p>
+        <p>Produkten av två jämna funktioner är jämn</p>
+        <p>Derivatan av en jämn funktion är en udda funktion</p>
+        <p>Polynom med jämna respektive udda exponenter är jämna respektive udda.</p>
+    </div>
+    <h3 id="node-4">Elementära funktioner</h3>
+    <p>De elementära funktioner är de funktioner som går att räkna med. Dessa funktioner är sammansättningar, summor och produkter av samtliga funktioner nedan och deras inverser.</p>
+    <ul>
+        <li>
+            <p> Polynom</p>
+        </li>
+        <li>
+            <p> Rationella funktioner</p>
+        </li>
+        <li>
+            <p> Exponentialfunktioner</p>
+        </li>
+        <li>
+            <p> Logaritmer</p>
+        </li>
+        <li>
+            <p> Trigonometriska funktioner</p>
+        </li>
+    </ul>
+    <p>Notera att rötter kan skrivas om från dessa funktioner och är därmed också elementära, exempelvis </p>
+    <div data-math="block">
+    \sqrt{x} = x^{\dfrac{1}{2}} = \left(e^{\ln x}\right)^{\dfrac{1}{2}} = e^{\dfrac{1}{2} \ln x} 
+    </div>
+    <h4 id="node-5">Polynom</h4>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Definition av polynom: <span data-math="inline">P(x) = a_n x^n + a_{n-1} x^{n-1} + ... + a_1 x + a_0</span>. </p>
+    </div>
+    <p>Definitionsmängden <span data-math="inline">D(P) = R</span> är samtliga reella tal</p>
+    <p>Faktorsatsen: <span data-math="inline">P(r)=0 \iff (x - r) Q(x)</span> där <span data-math="inline">Q</span> är av en lägre grad än <span data-math="inline">P</span> och <span data-math="inline">r</span> är ett nollställe.</p>
+    <h4 id="node-6">Rationella funktioner</h4>
+    <p>Def: Polynomet <span data-math="inline">R(x)</span> defineras enligt </p>
+    <div data-math="block">R(x) = \dfrac{P(x)}{Q(x)}</div>
+    <p> </p>
+    <p>där <span data-math="inline">P(x), Q(x)</span> är polynom och <span data-math="inline">Q(x) \ne 0</span>  </p>
+    <div data-math="block">S = \{ x \in \mathbb{R} \mid x &gt; 0 \}</div>
+    <h4 id="node-7">Exponentialfunktioner</h4>
+    <p>Def: <span data-math="inline">f(x) = e^x</span> defineras enligt <span data-math="inline">f'(x) = f(x), f(0) = 1</span></p>
+    <p><span data-math="inline">f</span> kan skrivas som en taylorsumma enligt</p>
+    <p><span data-math="inline">e^x = 1 + x + frac{x^2}{2} + frac{x^3}{3!} + frac{x^4}{4!} + frac{x^5}{5!}</span></p>
+    <h4 id="node-8">Logaritmer</h4>
+    <p><span data-math="inline">ln x</span> är invers till <span data-math="inline">e^x</span></p>
+    <h4 id="node-9">Trigonometriska funktioner</h4>
+    <p>Defineras enligt <span data-math="inline">cos t, sin t</span> på enhetscirkeln.</p>
+    <p>Måste kunna för kursen/Lära sig utantill</p>
+    <ul>
+        <li>
+            <p> Additionsformler</p>
+        </li>
+        <li>
+            <p> Dubbla vinkeln</p>
+        </li>
+        <li>
+            <p> Funktionsvärden s.50)</p>
+        </li>
+    </ul>
+    <div data-math="block">
+    tan(t) = \frac{sin t}{cos t}
+    </div>
+    <div data-math="block">
+    cot(t) = \frac{cos t}{sin t}
+    </div>
+    <h3 id="node-10">Sammansatta funktioner</h3>
+    <p>Sammansatta funktioner är en funktion vars resultat ges vidare till en annan funktion, vilket betecknas <span data-math="inline">f(g(x))</span> eller <span data-math="inline">f \circ g</span>.</p>
+    <h3 id="node-11">Styckvis definerade funktioner</h3>
+    <p>Definerade med olika formeluttryck för olika intervall, exempelvis </p>
+    <p><span data-math="inline">
+
+    f(x) = 
+    \begin{cases}
+      (x + 1)^2 &amp; \text{om} x \ge 0 \\
+      -x &amp; \text{om} x &lt; 0 \\
+    \end{cases} 
+    </span></p>
+    <p>Exempel se 1</p>
+    <h2 id="node-12">Gränsvärden</h2>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt fx) vara definerad för alla x nära a. Vi säger att fx) har gränsvärdet L då x går mot a, förutsatt att avståndet mellan <span data-math="inline">|f(x) - L|</span> är godtyckligt litet inom ett xintervall. Detta kan garanteras genom att välja intervallet tillräckligt litet kring a. </p>
+    <div data-math="block">
+    \lim_{x \to a} f(x) = L
+    </div>
+    <p>Exempel </p>
+    <p>Beräkna</p>
+    <div data-math="block">
+    \lim_{x \to 2} f(x)
+    </div>
+    <p> </p>
+    <p>då <span data-math="inline">f(x) = x</span> </p>
+    <p>Gränsvärdet måste vara <span data-math="inline">2</span> då <span data-math="inline">|f(x) - L| = |x - 2|</span>  kan göras tillräckligt litet genom att välja ett tillräckligt litet x-intervall där <span data-math="inline">x ≠ a</span>. </p>
+    <p>Om vi väljer x-intervall runt a t.ex <span data-math="inline">(2 - 0.001, 2 + 0.001)</span></p>
+    <h3 id="node-13">Några formelers gränsvärde</h3>
+    <table>
+        <tr>
+            <td>
+                <p>a</p>
+            </td>
+            <td>
+                <p>b</p>
+            </td>
+            <td>
+                <p>c</p>
+            </td>
+            <td>
+                <p>d</p>
+            </td>
+        </tr>
+    </table>
+    <p><span data-math="inline">f(x) = \frac{1}{x}, D(t) = \set{x \in R | x ≠ 0}</span></p>
+    <p><span data-math="inline">\lim_{x \to 0} f(x) = \text{existerar ej}</span></p>
+    <p><span data-math="inline">f(x) = sin \frac{1}{x}</span></p>
+    <p><span data-math="inline">\lim_{x \to 0} f(x) = \text{existerar ej}</span></p>
+    <p>begränsad av  1, funktionen närmar sig inget L</p>
+    <p><span data-math="inline">f(x) = frac{x^2 - 9}{x - 3} = frac{(x - 3)(x + 3)}{x - 3}, D(t) = {x ≠ 3}</span></p>
+    <p>då <span data-math="inline">x ≠ 3</span> gäller <span data-math="inline">frac{(x - 3)(x + 3)}{x - 3} = x + 3</span></p>
+    <p><span data-math="inline">\lim_{x \to 3} f(x)</span></p>
+    <p>då x är skiljt från 0</p>
+    <p><span data-math="inline">\lim_{x \to 3} f(x) = \lim_{x \to 3} frac{(x - 3)(x + 3)}{x - 3} = \lim_{x \to 3} x - 3 = 6</span></p>
+    <h3 id="node-14">Instängningsprincipen</h3>
+    <p>Instängningsprincipen Sats 4 sid 71): </p>
+    <p>Om <span data-math="inline">f(x)</span>, <span data-math="inline">g(x)</span> och <span data-math="inline">h(x)</span> är funktioner så att <span data-math="inline">f(x) \le g(x) \le h(x)</span> nära <span data-math="inline">x=a</span> och </p>
+    <div data-math="block"> 
+    \lim_{x \to a} f(x) = \lim_{x \to a} h(x) = L 
+    </div>
+    <p>har <span data-math="inline">g(x)</span> samma gränsvärde då <span data-math="inline">x \to a</span> </p>
+    <div data-math="block">
+    \lim_{x \to a} g(x) = L
+    </div>
+    <p>Funktionerna <span data-math="inline">f</span> och <span data-math="inline">h</span> "stänger in" värdet för <span data-math="inline">g</span>, vilket gör att det "tvingas" till samma gränsvärde.</p>
+    <img id="node-15" height="400px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2235.396877mm%22 %20%20%20height=%2226.572153mm%22 %20%20%20viewBox=%220%200%2035.396877%2026.572153%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22marker1%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%221%22 %20%20%20%20%20%20%20markerHeight=%221%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-52.600273,-29.502849)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23e61919;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2055,37%20c%200,0%203.803988,4.421384%206.466549,4.999997%202.854929,0.620417%205.64696,-2.451323%208.533453,-1.999998%20C%2071.92032,40.300255%2073.213346,42.891991%2075,42.999998%2076.786653,43.108004%2078.202733,42.019316%2079.482608,41%2081.440917,39.440368%2084,34.999998%2084,34.999998%22 %20%20%20%20%20%20%20id=%22path3%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g3%22 %20%20%20%20%20%20%20id=%22use31%22 %20%20%20%20%20%20%20transform=%22translate(4.9999995,0.50000066)%22 %20%20%20%20%20%20%20style=%22display:inline%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22M%2065.000001,54.999998%20V%2029.999999%22 %20%20%20%20%20%20%20id=%22path20%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22M%2052.700273,49.999999%20H%2087.500001%22 %20%20%20%20%20%20%20id=%22path21%22%20/%3E %20%20%20%20%3Ccircle %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20id=%22path2%22 %20%20%20%20%20%20%20cx=%2275%22 %20%20%20%20%20%20%20cy=%2243%22 %20%20%20%20%20%20%20r=%220.34210685%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23195de6;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22M%2055.000001,54.999998%20C%2059,42.000002%2064.739116,41.622417%2075,42.999998%20c%201.746531,0.105581%208.96334,0.265463%2012.000002,-3.999999%22 %20%20%20%20%20%20%20id=%22path4%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23e69219;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2061,56.000002%20c%201.687763,-6.875105%208.463263,-13.334711%2014,-13.000004%205.536737,0.334707%208.713172,2.598609%2010.688606,7.552776%22 %20%20%20%20%20%20%20id=%22path5%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.32292px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23e69219;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2285.952332%22 %20%20%20%20%20%20%20y=%2245.60733%22 %20%20%20%20%20%20%20id=%22text1%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan1%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.32292px;fill:%23e69219;fill-opacity:1;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%2285.952332%22 %20%20%20%20%20%20%20%20%20y=%2245.60733%22%3Ef%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.32292px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23195de6;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2285.952332%22 %20%20%20%20%20%20%20y=%2239.012215%22 %20%20%20%20%20%20%20id=%22text2%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan2%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.32292px;fill:%23195de6;fill-opacity:1;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%2285.952332%22 %20%20%20%20%20%20%20%20%20y=%2239.012215%22%3Eg%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.32292px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23e61919;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2283.003227%22 %20%20%20%20%20%20%20y=%2234.202187%22 %20%20%20%20%20%20%20id=%22text3%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan3%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.32292px;fill:%23e61919;fill-opacity:1;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%2283.003227%22 %20%20%20%20%20%20%20%20%20y=%2234.202187%22%3Eh%3C/tspan%3E%3C/text%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    <h3 id="node-16">Gränsvärden med oändlighet</h3>
+    <p>Def: med <span data-math="inline">x</span> godtyckligt stort... se bok s.73)</p>
+    <ul>
+        <li>
+            <p> Tänk på asymptoter</p>
+        </li>
+    </ul>
+    <h3 id="node-17">Räkneregler för gränsvärden</h3>
+    <p>För att underlätta gränsvärdes beräkningar finns det några regler för gränsvärden. Dessa kräver dock oftast) att gränsvärdet existerar och därmed måste uttrycket konvergera. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Räkneregler för gränsvärden).</strong></p>
+
+    </div>
+    <h3 id="node-18">Formeldefinition av gränsvärde</h3>
+    <p>I den informella definitionen av gränsvärde behöver avståndet mellan <span data-math="inline">|f(x) - L|</span> vara godtyckligt litet. Den formella defintionen utgår istället från att felet mellan gränsvärdet och funktionen ska kunna väljas så litet som krävs genom att ändra på avståndet <span data-math="inline">d</span> från gränsvärdet <span data-math="inline">a</span>.</p>
+    <p>Formeldefinition av gränsvärde: Låt <span data-math="inline">f</span> vara en funktion definierad på en öppen omgivning av <span data-math="inline">a</span> (med eventuellt undantag för punkten <span data-math="inline">a</span> själv). Vi säger att</p>
+    <div data-math="block">
+    \lim_{x \to a} f(x) = L
+    </div>
+    <p>om det för varje <span data-math="inline">\epsilon &gt; 0</span> finns ett <span data-math="inline">\delta &gt; 0</span> sådant att</p>
+    <div data-math="block">
+    0 \lt |x - a| \lt \delta \text{ och } x \in D(f) \implies |f(x) - L| &lt; \epsilon
+    </div>
+    <h2 id="node-19">Kontinuitet</h2>
+    <p>Def: Funktionen <span data-math="inline">f(x)</span> är kontinuerlig i <span data-math="inline">x = a</span> om </p>
+    <div data-math="block">
+    \lim_{x \to a} f(x) = f(a)
+    </div>
+    <p>och <span data-math="inline">a \in D(f)</span></p>
+    <p>Notera att detta kräver att <span data-math="inline">f(x)</span> har samma gränsvärde då värdet närmar sig från både negativa och positiva hållet. Glöm inte heller att funktionen bör vara definerad i punkten för att vara kontinuerlig i punkten. </p>
+    <p>Definition:</p>
+    <p>En funktion <span data-math="inline">f(x)</span> är kontinuerlig om den är kontinuerlig i varje punkt <span data-math="inline">c \in D(f)</span> där c är i definitionsmängden). </p>
+    <p>Exempelvis är funktionen <span data-math="inline">\frac{sin x}{x}</span> inte definerad för <span data-math="inline">x = 0</span>, men i och med att funktionen i är kontinuerlig i resterande punkter i definitionsmängden är det en kontinuerlig funktion.</p>
+    <h3 id="node-20">Kontinuitet och elementära funktioner</h3>
+    <p>Defintionen utgår från att gränsvärdet i <span data-math="inline">a</span> också är funktionsvärdet i <span data-math="inline">a</span>, vilket kort och gott innebär att en kontinuerlig funktion är en funktion vars graf är sammanhängande. Alla elementära funktioner är kontinuerliga i samtliga punkter inom definitionsmängden och vid gränsvärdesberäkningar behöver därmed endast de ickedefinerade punkternas gränsvärde undersökas. Dessutom är alla elementära funktioner kontinuerliga, vilket innebär att</p>
+    <div data-math="block">
+    f \text{ är elementär} \implies f \text{ är kontinuerlig}
+    </div>
+    <h3 id="node-21">Höger och vänsterkontinuitet</h3>
+    <p>Definition:</p>
+    <ul>
+        <li>
+            <p> <span data-math="inline">f</span> är högerkontinuerlig i c om <span data-math="inline">\lim_{x \to c+} = f(c)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">f</span> är vänsterkontinuerlig i c om <span data-math="inline">\lim_{x \to c-} = f(c)</span></p>
+        </li>
+    </ul>
+    <p>Notera att en funktion kan vara höger eller vänsterkontinuerlig i en randpunkt. </p>
+    <h3 id="node-22">Kontinuerliga utvidningar</h3>
+    <p>Funktionen <span data-math="inline">f(x)</span> går att utvidgas i <span data-math="inline">c</span> så att den förblir kontinuerlig om <span data-math="inline">\lim_{x \to c+} = \lim_{x \to c-}</span> genom att lägga till punkten <span data-math="inline">f(c) = \lim_{x \to c} f(x)</span>.</p>
+    <h3 id="node-23">Kontinuerliga funktioner på slutna intervall</h3>
+    <p>En kompakt funktion är sluten och begränsad.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Mellanliggande värdensatsen).</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">f</span> vara en kontinuerlig funktion på det slutna intervallet <span data-math="inline">[a, b]</span>. Om <span data-math="inline">s</span> är ett tal mellan <span data-math="inline">f(a)</span> och <span data-math="inline">f(b)</span> finns det minst ett tal <span data-math="inline">c \in [a, b]</span> sådant att:</p>
+    <div data-math="block">
+    f(c) = s
+    </div>
+    <p>Om <span data-math="inline">s</span> är strikt mellan <span data-math="inline">f(a)</span> och <span data-math="inline">f(b)</span> det vill säga <span data-math="inline">f(a) &lt; s &lt; f(b)</span> eller <span data-math="inline">f(b) &lt; s &lt; f(a)</span>), så finns <span data-math="inline">c</span> i det öppna intervallet <span data-math="inline">(a, b)</span>.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Extremvärdessatsen).</strong></p>
+
+    </div>
+    <p>Om <span data-math="inline">f</span> är en kontinuerlig funktion där <span data-math="inline">D(f) = [a, b]</span> antar <span data-math="inline">f</span> ett min och maxvärde inom <span data-math="inline">[a, b]</span>.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Generaliserade medelvärdessatsen).</strong></p>
+
+    </div>
+    <p>Om <span data-math="inline">f, g</span> är kontinuerliga och deriverbara funktioner på <span data-math="inline">(a, b)</span> där <span data-math="inline">g'(x) \neq 0</span> finns ett värde <span data-math="inline">c \in (a, b)</span> så att </p>
+    <div data-math="block">
+    \frac{f(b) - f(a)}{g(b) - g(a)} = \frac{f'(c)}{g'(c)}
+    </div>
+</body>
+</html>

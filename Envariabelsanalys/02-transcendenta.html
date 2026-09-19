@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<!-- KaTeX JS & Auto-render extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Render elements matching data-math="block"
+    document.querySelectorAll('[data-math="block"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: true,
+        throwOnError: false
+        });
+    });
+    document.querySelectorAll('[data-math="inline"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: false,
+        throwOnError: false
+        });
+    });
+    });
+</script>
+
+<style>
+/* Modern Reset & Root Variables */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: hsl(215, 0%, 0%);
+  --accent-color1: hsl(221, 83%, 53%);
+  --accent-color2: hsl(28, 83%, 53%);
+  --accent-light: hsl(221, 0%, 95%);
+  --border-color: #e2e8f0;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-color1);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Treat top H1 as the main document title */
+h1:first-of-type {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Body Text & Paragraphs */
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Lists */
+ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+li p {
+  margin-bottom: 0;
+}
+
+/* KaTeX Formatting Enhancements */
+
+/* Block Equations */
+[data-math="block"] {
+  display: block;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+/* Inline Math Spacing Fixes */
+[data-math="inline"] {
+  padding: 0 2px;
+}
+
+.theorem,
+.definition {
+    background-color: var(--accent-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
+
+.theorem {
+    border-left: 4px solid var(--accent-color1);
+}
+
+.definition {
+    border-left: 4px solid var(--accent-color2);
+}
+
+/* Responsive view for mobile screens */
+@media (max-width: 840px) {
+  body {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 1.25rem;
+  }
+}
+
+
+img {
+  min-height: 200px;
+}
+</style></head>
+<body>
+    <h1 id="node-0">Transcendenta funktioner</h1>
+    <p>Algebraiska funktioner är funktioner som kan skrivas med de fyra räknesätten samt rötter. Funktionerna som inte är algebraiska kallas för transcendenta funktioner, vilka exempelvis är</p>
+    <ul>
+        <li>
+            <p> <span data-math="inline">e^x</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">ln(x)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">cos (x), sin (x)</span> och <span data-math="inline">tan (x)</span></p>
+        </li>
+    </ul>
+    <p>Dessutom inkluderar de transcendenta funktionerna varandras inverser. </p>
+    <h2 id="node-1">Injektiva funktioner</h2>
+    <p>För att en funktion ska vara inverterbar behöver den vara etttillett, även skrivet 11, vilket innebär att ett output värde endast ges av ett input värde. Funktioner som är 11 kallas injektiva.</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">f</span> vara en funktion. Om </p>
+    <div data-math="block">
+    f(x_1) = f(x_2) \\
+    \Updownarrow \\
+    x_1 \neq x_2 \implies f(x_1) \neq f(x_2)
+    </div>
+    <p>är funktionen injektiv. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Egenskaper för injektiva funktioner).</strong></p>
+
+    </div>
+    <p>Varje horisontell linje skär grafen till en injektiv funktion endast en gång</p>
+    <p>Strikt växande och avtagande funktioner är injektiva. </p>
+    <p>Funktioner som inte är injektiva kan göras injektiva genom att ändra definitionsmängden. Exempelvis är både funktionen <span data-math="inline">f(x): \mathbb{R^+} \to \mathbb{R}  = x^2</span> injektiv och <span data-math="inline">f(x): \mathbb{R^-} \to \mathbb{R}  = x^2</span> injektiva. </p>
+    <h2 id="node-2">Inversa funktioner</h2>
+    <p>En funktion kan ses som en regel där ett värde ger ett annat värde. Invers funktion är den regel som från outputvärdet ger inputvärdet och kan exempelvis hittas genom att lösa ut <span data-math="inline">x</span> i <span data-math="inline">f(x)</span>. För att en funktion ska ha en invers bör den både vara injektiv och surjektiv.</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Om <span data-math="inline">f</span> är 11 har den en invers funktion <span data-math="inline">f^{-1}(x)</span> som bestäms av</p>
+    <div data-math="block">
+    y = f^{-1}(x) \Leftrightarrow x = f(y)
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Inversa funktioners egenskaper).</strong></p>
+
+    </div>
+    <ol>
+        <li>
+            <p> <span data-math="inline">R(f^{-1}) = D(f)</span> och <span data-math="inline">R(f) = D(f^{-1})</span></p>
+        </li>
+        <li>
+            <p> Den inversa funktionen <span data-math="inline">f^{-1}(x)</span> är speglingen av funktionen <span data-math="inline">f(x)</span> i linjen <span data-math="inline">y = x</span>. </p>
+        </li>
+        <li>
+            <p> <span data-math="inline">y = (f^{-1})^{-1} (x)) = f(x) \Leftrightarrow x = f^{-1}(y)</span>, vilket grafiskt kan tolkas som att två speglingar över linjen <span data-math="inline">y = x</span> ger den ursprungliga funktionen.</p>
+        </li>
+        <li>
+            <p> <span data-math="inline">f^{-1}(f(x)) = x</span> och <span data-math="inline">f(f^{-1}(x)))</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">\dfrac{d}{dx} f'^{-1}(x) = \dfrac{1}{f'(f^{-1}(x))}</span></p>
+        </li>
+    </ol>
+    <h2 id="node-3">Exponential och logaritmfunktioner</h2>
+    <p>Potenser med rationella tal som exponenter är relativt enkla att beräkna. Utifrån dessa kan potenser för irrationella tal defineras.</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <div data-math="block">
+    a^x = \lim_{r \to x} a^r \text{ där } r \in \mathbb{Q}
+    </div>
+    <p>Definitionen ovan är dock krånlig och det är enklare att först definera den naturliga logaritmen. Genom att definera den naturliga logaritmen kan dess invers, exponential funktionen, defineras. </p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">A_x</span> vara arean under grafen <span data-math="inline">\frac{1}{x}</span></p>
+    <div data-math="block">
+    ln(x) = \begin{cases}
+    A_x, x \ge 1 \\
+    -A_x, 0 \lt x \lt 1
+    \end{cases}
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Derivatan av den naturliga logaritmen).</strong></p>
+
+    </div>
+    <div data-math="block">
+    \frac{d}{dx} ln(x) = 1/x
+    </div>
+    <p>Med hjälp av derivatan för den naturliga logaritmen kan dess räkneregler härledas. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Räkneregler för naturliga logaritmer).</strong></p>
+
+    </div>
+    <ol>
+        <li>
+            <p> <span data-math="inline">ln(xy) = ln(x) + ln(y)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">ln \frac{1}{x} = -ln(x)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">ln \frac{x}{y} = ln(x)-ln(y)</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">y ln(x) = ln(x^y)</span></p>
+        </li>
+    </ol>
+    <p>Då den naturliga logaritmen är en 11 funktion har den en invers, vilket utnyttjas i definitionen av exponentialfunktionen.</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <div data-math="block">
+    y = exp(x) \Leftrightarrow x = ln(y)
+    </div>
+    <p>Utifrån definitionen ovan framgår att definitionsmängden för exponentialfunktionen är <span data-math="inline">\mathbb{R}</span> och värdemängden är <span data-math="inline">\mathbb{R}^+</span>. Talet <span data-math="inline">e</span> defineras så att <span data-math="inline">exp(x) = e^x</span>.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Exponentialfunktioners räkneregler).</strong></p>
+
+    </div>
+    <div data-math="block">
+    (e^x)^y = e^{x y}                         \\
+    e^{(x + y)} = e^x e^y                     \\
+    e^{-x} = \frac{1}{e^x}                    \\
+    e^{(x - y)} = \frac{e^x}{e^y}             \\
+    </div>
+    <p>Då derivatan av <span data-math="inline">\ln y</span> är känd kan derivatan för <span data-math="inline">e^x</span> härledas, vilket ger att <span data-math="inline">e^x</span> är sin egen derivata.</p>
+    <h3 id="node-4">Exponentialfunktioner och logaritmers tillväxt</h3>
+    <p>Olika funktioner växer olika fort mot oändligheten, där exempelvis exponentialfunktioner växer snabbare än polynomfunktioner som i sin tur växer snabbare än logaritmiska funktioner. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Tillväxten för exponentialfunktioner och logaritmer).</strong></p>
+
+    </div>
+    <p>Om <span data-math="inline">a \gt 0</span> gäller</p>
+    <div data-math="block">
+    \lim_{x \to \infty}     \frac{x^a}{e^x}  = 0    \\
+    \lim_{x \to \infty}     \frac{ln x}{x^a} = 0    \\
+    \lim_{x \to -\infty}    |x|^a e^x        = 0    \\
+    \lim_{x \to -\infty}    x^a ln x         = 0    \\
+    </div>
+    <h2 id="node-5">Trigonometriska funktioners inverser</h2>
+    <p>Då de trigonometriska funktionerna inte är 11 är de inte inverterbara. För att göra de trigonometriska funktionerna inverterbara begränsas deras intervall. Exempelvis begränsas sin till intervallet <span data-math="inline">[-\pi / 2, \pi / 2]</span> där den har värdemängden <span data-math="inline">[-1, 1]</span>. </p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">y \in [- \dfrac{\pi}{2},  \dfrac{\pi}{2}]</span> och <span data-math="inline">x \in [-1, 1]</span>. Funktionen arcsinus, inversen till sinus, defineras enligt</p>
+    <div data-math="block">
+    y = sin^{-1}(x) \Leftrightarrow x = sin(y)
+    </div>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">x \in [0, \pi]</span> och <span data-math="inline">y \in [-1, 1]</span>. Funktionen arccos defineras enligt</p>
+    <div data-math="block">
+    y = cos^{-1}(x) \Leftrightarrow x = cos(y)
+    </div>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+
+    </div>
+    <p>Låt <span data-math="inline">x \in (-\dfrac{\pi}{2}, \dfrac{\pi}{2})</span> och <span data-math="inline">y \in \mathbb{R}</span>. Funktionen arccos defineras enligt</p>
+    <div data-math="block">
+    y = tan^{-1}(x) \Leftrightarrow x = tan(y)
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Derivatan av inversa funktioner).</strong></p>
+
+    </div>
+    <div data-math="block">
+    \frac{d}{dx} sin^{-1}(x) = \dfrac{1}{\sqrt{1-x^2}} \\
+    \frac{d}{dx} cos^{-1}(x) = -\dfrac{1}{\sqrt{1-x^2}} \\
+    \frac{d}{dx} tan^{-1}(x) = \dfrac{1}{1+x^2}
+    </div>
+    <p> </p>
+    <p>där <span data-math="inline">x \in (-1, 1)</span></p>
+    <h2 id="node-6">Differentialekvationer</h2>
+    <p>En differentialekvation är en ekvation där som beskriver ett samband mellan en okänd funktions derivator. Differentialekvationens ordning bestäms av den högsta derivatan i ekvationen och ger antalet obestämda konstanter i den allmänna lösningen. Värdena på dessa konstanter bestäms med initialvillkor. Notera att avsnittet av differentialekvationer inte beskrivs lika grundligt som de andra avsnitten. En enklare och mer omfattande genomgång finns i Sammanfattning av Matematik 5 medan en mer avancerad genomgång eventuellt kommer i en framtida kurs. </p>
+    <h3 id="node-7">Homogena differentialekvationer</h3>
+    <p>Om ekvationen innehåller en annan, känd, funktion än den obekanta är differentialfunktionen inhomogen. För linjära homogena ekvationer gäller att linjärkombinationer av lösningar också är lösningar.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Lösning till linjära differentialekvationer).</strong></p>
+
+    </div>
+    <p>Differentialekvationen</p>
+    <div data-math="block">
+    y'' + ay' + by = 0
+    </div>
+    <p>har den karakteristiska ekvationen <span data-math="inline">r^2 + ra + b = 0</span>. Om </p>
+    <ol>
+        <li>
+            <p> <span data-math="inline">r_1 \neq r_2</span> ger lösningen <span data-math="inline">y = C_1 e^{r_1 t} + C_2 e^{r_2 t}</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">r_1= r_2</span> ger lösningarna <span data-math="inline">y = e^{r_1 t} (Ct + D)</span>, som består av <span data-math="inline">y_1 = e^{r t}</span> och <span data-math="inline">y_2 = t e^{r t}</span></p>
+        </li>
+        <li>
+            <p> <span data-math="inline">r = \alpha + \beta i</span> ger lösningarna <span data-math="inline">y = e^{\alpha t} (C_1 cos(\beta t) + C_2 sin(\beta t))</span></p>
+        </li>
+    </ol>
+    <h3 id="node-8">Inhomogena linjära differentialekvationer</h3>
+    <p>En generell linjär differentialekvation kan skrivas som</p>
+    <div data-math="block">
+    y'' + ay' + by = f(t)
+    </div>
+    <p>Lösningen till differentialekvationen består av lösningen till motsvarande homogena ekvation <span data-math="inline">y_h</span> och en partikulär lösning <span data-math="inline">y_p</span> så att <span data-math="inline">y = y_p + y_h</span>. Lösningen <span data-math="inline">y_p</span> hittas oftast genom gissning funktionens utseende med godtyckliga konstanter. Notera dock att ingen term i <span data-math="inline">y_p</span> får finnas med i <span data-math="inline">y_h</span> och om så är fallet, multiplicera med <span data-math="inline">t</span> och försök igen. Gissningar kan göras enligt tabellen, som dock inte är fullständig. </p>
+    <table>
+        <tr>
+            <td>
+                <p><span data-math="inline">f(t)</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">y_p</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><span data-math="inline">e^{ax}</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">Ce^{ax}</span></p>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

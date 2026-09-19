@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+<!-- KaTeX JS & Auto-render extension -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+        onload="renderMathInElement(document.body);"></script>
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Render elements matching data-math="block"
+    document.querySelectorAll('[data-math="block"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: true,
+        throwOnError: false
+        });
+    });
+    document.querySelectorAll('[data-math="inline"]').forEach(function(element) {
+        // Clean up HTML-escaped strings for proper LaTeX parsing
+        let cleanTex = element.textContent
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&amp;/g, '&');
+
+        katex.render(cleanTex, element, {
+        displayMode: false,
+        throwOnError: false
+        });
+    });
+    });
+</script>
+
+<style>
+/* Modern Reset & Root Variables */
+:root {
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: hsl(215, 0%, 0%);
+  --accent-color1: hsl(221, 83%, 53%);
+  --accent-color2: hsl(28, 83%, 53%);
+  --accent-light: hsl(221, 0%, 95%);
+  --border-color: #e2e8f0;
+  --radius: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 18px;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-color);
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Headings */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--accent-color1);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Treat top H1 as the main document title */
+h1:first-of-type {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Body Text & Paragraphs */
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Lists */
+ul {
+  margin-bottom: 1.5rem;
+  padding-left: 1.25rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+  color: var(--text-secondary);
+}
+
+li p {
+  margin-bottom: 0;
+}
+
+/* KaTeX Formatting Enhancements */
+
+/* Block Equations */
+[data-math="block"] {
+  display: block;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+}
+
+/* Inline Math Spacing Fixes */
+[data-math="inline"] {
+  padding: 0 2px;
+}
+
+.theorem,
+.definition {
+    background-color: var(--accent-light);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem;
+    margin: 1.5rem 0;
+}
+
+.theorem {
+    border-left: 4px solid var(--accent-color1);
+}
+
+.definition {
+    border-left: 4px solid var(--accent-color2);
+}
+
+/* Responsive view for mobile screens */
+@media (max-width: 840px) {
+  body {
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    padding: 1.25rem;
+  }
+}
+
+
+img {
+  min-height: 200px;
+}
+</style></head>
+<body>
+    <h1 id="node-0">Tillämpning av derivata</h1>
+    <h2 id="node-1">Gränsvärden av obestämd form</h2>
+    <p>Ett gränsvärde på obestämd form är ett gränsvärde som vanliga beräkningar inte kan ge ett definitivt svar. Gränsvärden av typen </p>
+    <div data-math="block">
+    \lim_{x \to a} \frac{f(x)}{g(x)}
+    </div>
+    <p>beräknar den relativa storleken av <span data-math="inline">f</span> och <span data-math="inline">g</span> vid <span data-math="inline">x=a</span>. Om både <span data-math="inline">f</span> och <span data-math="inline">g</span> går mot noll blir gränsvärdet på obestämd form och avgörs av vilken av <span data-math="inline">f</span> och <span data-math="inline">g</span> som växer snabbast.  </p>
+    <p>Ett sätt att beräkna gränsvärden av obestämd form är L'Hopitals regel som är ett specialfall av linjärisering. Det går även tillämpa taylorutveckling, vilket beskrivs senare i kursen.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (L'Hoptials regel).</strong></p>
+        <p>Om </p>
+        <div data-math="block">
+    \begin{align*}
+      \lim_{x \to a} f(x) &amp;= \lim_{x \to a} g(x) &amp;&amp;= 0 \quad \text{eller} \\
+      \lim_{x \to a} |f(x)| &amp;= \lim_{x \to a} |g(x)| &amp;&amp;= \infty
+    \end{align*}
+    </div>
+        <p>och</p>
+        <div data-math="block">
+    \lim_{x \to a} \frac{f'(x)}{g'(x)} = L
+    </div>
+        <p>gäller</p>
+        <div data-math="block">
+    \lim_{x \to a} \frac{f(x)}{g(x)} = L
+    </div>
+        <p>Detta gäller även för ensidiga gränsvärden samt när <span data-math="inline">a \to \pm \infty</span> och <span data-math="inline">L = \pm \infty</span>.</p>
+    </div>
+    <p>Ibland kan det krävas att tillämpa L'Hopitals regel flera gånger eller skriva om uttrycket på bråkform.</p>
+    <h2 id="node-2">Extremvärden</h2>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Existensen av extremvärden).</strong></p>
+        <p>Ett extremvärde måste vara i</p>
+        <ol>
+            <li>
+                <p> en kritiska punkt <span data-math="inline">f'(x) = 0</span>)</p>
+            </li>
+            <li>
+                <p> singulär punkt <span data-math="inline">x \notin D(f')</span>)</p>
+            </li>
+            <li>
+                <p> ändpunkt</p>
+            </li>
+        </ol>
+    </div>
+    <p>Max och minpunkterna kan identifieras genom att undersöka alla</p>
+    <ol>
+        <li>
+            <p> kritiska punkter</p>
+        </li>
+        <li>
+            <p> singulära punkter</p>
+        </li>
+        <li>
+            <p> ändpunkter</p>
+        </li>
+    </ol>
+    <p>På intervall</p>
+    <p>Se förstaderivatatestet s.239 // över väg att flytta detta längre ned</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Funktionen <span data-math="inline">f</span> är konvex eller konkav om <span data-math="inline">f'</span> existerar och är strängt växande respektive avtagande på <span data-math="inline">I</span>.  </p>
+    </div>
+    <p>Där grafen övergår mellan att vara konvex eller konkav finns en infliktionspunkt där andraderivatan byter tecken. </p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Punkten <span data-math="inline">(x_0, f(x_0))</span> är en infliktionspunkt om </p>
+        <ol>
+            <li>
+                <p> <span data-math="inline">f</span> har en tangent i <span data-math="inline">x_0</span></p>
+            </li>
+            <li>
+                <p> konkaviteten är motsatt på båda sidor av <span data-math="inline">x_0</span></p>
+            </li>
+        </ol>
+    </div>
+    <p>Notera även att infliktionspunkter kan finnas i punkter med lodrät tangent.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Andraderivatan och konkavitet).</strong></p>
+        <p>Om </p>
+        <ul>
+            <li>
+                <p> <span data-math="inline">f''(x) &gt; 0</span> är <span data-math="inline">f</span> konvex</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">f''(x) &lt; 0</span> är <span data-math="inline">f</span> konkav</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">x_0</span> är en infliktionspunkt är <span data-math="inline">f''(x) = 0</span></p>
+            </li>
+        </ul>
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Andraderivatatestet).</strong></p>
+        <p>Låt <span data-math="inline">'f(x_0) = 0</span>. Om</p>
+        <ul>
+            <li>
+                <p> <span data-math="inline">f''(x_0) &gt; 0</span> är <span data-math="inline">x_0</span> en minpunkt.</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">f''(x_0) &lt; 0</span> är <span data-math="inline">x_0</span> en maxpunkt.</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">f''(x_0) = 0</span> kan <span data-math="inline">x_0</span> vara en lokal extrempunkt eller en infliktionspunkt.</p>
+            </li>
+        </ul>
+    </div>
+    <p>För att undersöka hurivida <span data-math="inline">f''(x_0) = 0</span> ger en extrempunkt, terraspunkt eller en infliktionspunkt behöver en teckentabell göras. </p>
+    <h2 id="node-3">Skissa grafer</h2>
+    <p>// s.251</p>
+    <p>För att skissa en graf kan alla eller delar av stegen nedan följas:</p>
+    <ul>
+        <li>
+            <p> Hitta extrempunkter</p>
+            <ul>
+                <li>
+                    <p> Undersök de kritiska punkterna</p>
+                </li>
+                <li>
+                    <p> Undersök singulära punkter</p>
+                </li>
+                <li>
+                    <p> Undersök ändpunkter</p>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <p> Hitta asymptoter och undersök grafens gränsvärde till <span data-math="inline">\pm \infty</span></p>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <p> Undersök konkavitet</p>
+        </li>
+    </ul>
+    <h2 id="node-4">Asymptoter</h2>
+    <p>En asymptot till grafen <span data-math="inline">y = f(x)</span> är en rät linje som grafen närmar sig då <span data-math="inline">x \to \pm \infty</span> eller <span data-math="inline">y \to \pm \infty</span>.</p>
+    <h2 id="node-5">Linjära approximationer</h2>
+    <h3 id="node-6">Linjära approximation med derivata</h3>
+    <p>Linjär approximation går ut på att tangentlinjen har ungefär samma värden som funktionen nära tangeringspunkten. Denna approximation kan göras enligt</p>
+    <div data-math="block">
+    f(x_0 + \Delta x) \approx f(x_0) + f'(x_0) \Delta x \\
+    f(x) \approx f(x_0) + f'(x_0) (x - x_0)
+    </div>
+    <p>där <span data-math="inline">x_0</span> är tangeringspunkten</p>
+    <img id="node-7" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2224.097149mm%22 %20%20%20height=%2218.546478mm%22 %20%20%20viewBox=%220%200%2024.097149%2018.546478%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22marker1%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-73.900002,-62.55352)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2075,79.999998%20c%202e-6,-3.639262%2015.000002,-9%2020.000002,-10.000001%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22M%2075,80.999998%20V%2064.305106%22 %20%20%20%20%20%20%20id=%22path20%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22M%2074.000002,79.999998%20H%2097.5%22 %20%20%20%20%20%20%20id=%22path21%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g3%22 %20%20%20%20%20%20%20transform=%22rotate(62.200973,80.000011,75.505443)%22%3E %20%20%20%20%20%20%3Ccircle %20%20%20%20%20%20%20%20%20style=%22fill:%23262626;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20id=%22path3%22 %20%20%20%20%20%20%20%20%20cx=%2280.000015%22 %20%20%20%20%20%20%20%20%20cy=%2275.50547%22 %20%20%20%20%20%20%20%20%20r=%220.22004659%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;fill-opacity:1;stroke:%23262626;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.15,%200.3;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20d=%22m%2080.000014,58.548425%201.6e-5,23.73985%22 %20%20%20%20%20%20%20%20%20id=%22path4%22%20/%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:end;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.15,%200.3;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20x=%22-19.832275%22 %20%20%20%20%20%20%20%20%20y=%2293.803421%22 %20%20%20%20%20%20%20%20%20id=%22text4%22 %20%20%20%20%20%20%20%20%20transform=%22rotate(-62.200973)%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20id=%22tspan4%22 %20%20%20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20%20%20x=%22-19.832275%22 %20%20%20%20%20%20%20%20%20%20%20y=%2293.803421%22%3EApproximation%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;fill-opacity:1;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20d=%22m%2073.088166,63.9473%206.286147,-1.206061%22 %20%20%20%20%20%20%20%20%20id=%22path5%22%20/%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:end;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.15,%200.3;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20x=%22-14.785649%22 %20%20%20%20%20%20%20%20%20y=%22107.97137%22 %20%20%20%20%20%20%20%20%20id=%22text5%22 %20%20%20%20%20%20%20%20%20transform=%22rotate(-62.200973)%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20id=%22tspan5%22 %20%20%20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20%20%20x=%22-14.785649%22 %20%20%20%20%20%20%20%20%20%20%20y=%22107.97137%22%3EFunktion%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;fill-opacity:1;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20d=%22m%2081.520671,65.722572%204.046901,0.283047%22 %20%20%20%20%20%20%20%20%20id=%22path6%22%20/%3E %20%20%20%20%3C/g%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    <p>Ett mindre <span data-math="inline">\Delta x</span> ger en bättre approximation och bör väljas så att den blir tillräckligt bra. Felet i en viss punkt blir funktionen</p>
+    <div data-math="block">
+    E(x) = f(x) - (f(x_0) + f'(x_0) (x-x_0))
+    </div>
+    <h3 id="node-8">Undersökning av felstorleken vid linjär approximering</h3>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Felformeln för linjärt approximering).</strong></p>
+        <p>Om <span data-math="inline">f''(t)</span> existerar för alla <span data-math="inline">t</span> i ett intervall innehållandes <span data-math="inline">x</span> och <span data-math="inline">a</span> så finns ett <span data-math="inline">s</span> sådant att</p>
+        <div data-math="block">
+    E(x) = \frac{f''(s)}{2} (x-a)^2
+    </div>
+    </div>
+    <p>Av satsen följer att</p>
+    <div data-math="block">
+    f(x) = f(a) + f'(a)(x-a) + \frac{f''(s)}{2} (x-a)^2
+    </div>
+    <p> </p>
+    <p>Av satsen följer även att </p>
+    <ul>
+        <li>
+            <p> Om <span data-math="inline">f''(t)</span> har konstant tecken har felet samma tecken.</p>
+        </li>
+        <li>
+            <p> Om <span data-math="inline">|f''(t)| &lt; k</span> mellan <span data-math="inline">a</span> och <span data-math="inline">x</span> är <span data-math="inline">|E(x)| \le \frac{k}{2} (x-a)^2 = O((x-a))^2</span>.</p>
+        </li>
+    </ul>
+    <h2 id="node-9">Ordo</h2>
+    <p>För att kunna jämföra funktioners tillväxttakt används begreppet ordo BigO på engelska). </p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p><span data-math="inline">f(x) = O(u(x))</span> när <span data-math="inline">x \to a</span> förutsatt att</p>
+        <div data-math="block">
+    |f(x)| \le K|u(x)|
+    </div>
+        <p>gäller för en konstant <span data-math="inline">K</span> på ett öppet intervall runt <span data-math="inline">a</span>.</p>
+    </div>
+    <p>Av definitionen följer även några räkneregler. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Räkneregler för ordo).</strong></p>
+        <p>Låt <span data-math="inline">f(x) = O(u(x))</span>, <span data-math="inline">g(x) = O(u(x))</span> och <span data-math="inline">h(x) = O((k-a)^k u(x))</span> då <span data-math="inline">x \to \infty</span></p>
+        <ul>
+            <li>
+                <p> <span data-math="inline">C f(x) = O(u(x))</span></p>
+            </li>
+            <li>
+                <p> <span data-math="inline">f(x) \pm g(x) = O(u(x))</span></p>
+            </li>
+            <li>
+                <p> <span data-math="inline">\frac{f(x)}{k-a)^k} = O(u(x))</span></p>
+            </li>
+        </ul>
+    </div>
+    <h2 id="node-10">Taylorpolynom</h2>
+    <p>Taylorpolynom kan användas till att antingen representera en funktion som en oändlig summa eller göra exakta approximeringar av en funktion. Taylorpolynomet approximerar funktionen så att det n:te taylorpolynomet har samma funktionsvärde och derivator fram till den n:te derivatan som funktionen i en viss punkt. </p>
+    <img id="node-11" height="400px" src="res/kap3/o_taylor_polynom.svg" alt="">
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Taylors sats).</strong></p>
+        <p>Om <span data-math="inline">f^{(n+1)}(t)</span> existerar för alla <span data-math="inline">t</span> mellan <span data-math="inline">x</span> och <span data-math="inline">a</span> är</p>
+        <div data-math="block">
+    f(x) = P_n(x) = \sum_{k = 0}^{n} \frac{f^{k}(a)}{k!} (x-a)^k + E_n(x)
+    </div>
+        <p>där</p>
+        <div data-math="block">
+    E_n(x) = \frac{f^{n+1}(s)}{(n+1)!} (x - a)^{n+1}
+    </div>
+        <p>för vilket <span data-math="inline">s</span> är något tal mellan <span data-math="inline">a</span> och <span data-math="inline">x</span>.</p>
+    </div>
+    <p>Taylorsatsen kan även skrivas upp med hjälp av ordonotation, vilket kan användas för att beräkna gränsvärden, enligt följande.</p>
+    <div data-math="block">
+    f(x) = P_n(x) + O((x-a)^{n+1})
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Entydighetssatsen).</strong></p>
+        <p>Om <span data-math="inline">f(x) = Q_n(x + O((x-a)^{n+1}))</span> då <span data-math="inline">x \to a</span> där <span data-math="inline">Q_n</span> är ett polynom av grad <span data-math="inline">n</span> är <span data-math="inline">Q_n(x)</span> Taylorpolynomet för <span data-math="inline">f(x)</span>.</p>
+    </div>
+    <h3 id="node-12">Taylorpolynom för kända satser</h3>
+    <p>Vissa funktioner har kända taylorpolynom, varav de vanligaste finns nedan.</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Kända funktioners Taylorpolynom).</strong></p>
+        <div data-math="block">
+    \begin{aligned}
+    e^x               &amp;= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}  + \dots  + \frac{x^n}{n!}                    + O(x^{n+1}) \\
+    \cos x            &amp;= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} + \dots   + (-1)^n  \frac{x^2n}{(2n)!}         + O(x^{2n+2}) \\
+    \sin x            &amp;= x - \frac{x^3}{3!} + \frac{x^5}{5!} + \dots   + (-1)^n  \frac{x^2n + 1}{(2n + 1)!} + O(x^{2n+3}) \\
+    \frac{1}{1-x}     &amp;= 1 + x + x^2 + x^3 + \dots + x^n + O(x^{n+1}) \\
+    \ln 1+x           &amp;= x - \frac{x^2}{2} + \frac{x^3}{3} + \dots + (-1)^{n-1} \frac{x^n}{n} + O(x^{n+1}) \\
+    \arctan x         &amp;= x - \frac{x^3}{3} + \frac{x^5}{5} + \dots + (-1)^{n} \frac{x^{2n + 1}}{n} + O(x^{2n+3}) \\
+    \end{aligned}
+    </div>
+    </div>
+</body>
+</html>
