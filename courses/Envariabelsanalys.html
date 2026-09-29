@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- KaTeX CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
@@ -168,6 +169,10 @@ li p {
     border-left: 4px solid var(--accent-color2);
 }
 
+.concept {
+  font-style: italic;
+}
+
 /* Responsive view for mobile screens */
 @media (max-width: 840px) {
   body {
@@ -176,6 +181,11 @@ li p {
     border: none;
     padding: 1.25rem;
   }
+
+  img {
+    max-width: 100%;
+  }
+
 }
 
 
@@ -226,7 +236,7 @@ img {
     <h2 id="node-2">Funktioner</h2>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
-        <p>Låt <span data-math="inline">D</span> och <span data-math="inline">S</span> vara mängder. En funktion <span data-math="inline">f: D \to S</span> är en regel som tilldelar ett värde <span data-math="inline">f(x)</span> i mängd <span data-math="inline">S</span> ett unikt element i mängd <span data-math="inline">D</span>.</p>
+        <p>Låt <span data-math="inline">D</span> och <span data-math="inline">S</span> vara mängder. En funktion <span data-math="inline">f: D \to S</span> är en regel som tilldelar ett värde <span data-math="inline">f(x)</span> i mängd <span data-math="inline">S</span> till ett unikt element i mängd <span data-math="inline">D</span>.</p>
     </div>
     <p>I definitionen ovan är <span data-math="inline">D</span> <span class="concept">definitionsmängden</span> och <span data-math="inline">S</span> är <span class="concept">målmängden</span>. Målmängden är de värden som funktionen teoretiskt kan antag medan värdemängden <span data-math="inline">R(f)</span> är mängden av de faktiska värden som funktionen kan antag. I denna kurs är <span data-math="inline">D, S, R(f) \subseteq R</span>.</p>
     <p>Exempelvis kan vi definiera funktionen <span data-math="inline">f(x): \mathbb{R} \to \mathbb{R} = x^2</span>. Funktionen har per definition målmängden <span data-math="inline">\mathbb{R}</span> men  värdemängden är endast <span data-math="inline">\mathbb{R}^+</span> då <span data-math="inline">x^2 \ge 0</span>.  </p>
@@ -235,9 +245,9 @@ img {
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
         <p>Funktionen <span data-math="inline">f(x)</span> är jämn om <span data-math="inline">f(-x) = f(x)</span></p>
-        <p>Funktionen <span data-math="inline">f(x)</span> är udda om <span data-math="inline">f(-x) \neq -f(x)</span></p>
+        <p>Funktionen <span data-math="inline">f(x)</span> är udda om <span data-math="inline">f(-x) = -f(x)</span></p>
     </div>
-    <p>Jämnafunktioner är symmetriska över yaxeln och udda funktioner är speglade i origo. </p>
+    <p>Jämnafunktioner är symmetriska över y-axeln och udda funktioner är speglade i origo. </p>
     <div class="theorem theorem-theorem">
         <p class="theorem-heading"><strong>Theorem (Jämna och udda funktioners egenskaper).</strong></p>
         <ul>
@@ -342,7 +352,7 @@ img {
     <h2 id="node-11">Gränsvärden</h2>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
-        <p>Låt fx) vara definerad för alla x nära a. Vi säger att fx) har gränsvärdet L då x går mot a, förutsatt att avståndet mellan <span data-math="inline">|f(x) - L|</span> är godtyckligt litet inom ett xintervall. Detta kan garanteras genom att välja intervallet tillräckligt litet kring a. </p>
+        <p>Låt fx) vara definerad för alla x nära a. Vi säger att fx) har gränsvärdet L då x går mot a, förutsatt att avståndet mellan <span data-math="inline">|f(x) - L|</span> är godtyckligt litet inom ett x-intervall. Detta kan garanteras genom att välja intervallet tillräckligt litet kring a. </p>
         <div data-math="block">
     \lim_{x \to a} f(x) = L
     </div>
@@ -423,7 +433,7 @@ img {
     </div>
     <p>Exempelvis är funktionen <span data-math="inline">\frac{sin x}{x}</span> inte definerad för <span data-math="inline">x = 0</span>, men i och med att funktionen i är kontinuerlig i resterande punkter i definitionsmängden är det en kontinuerlig funktion.</p>
     <h3 id="node-19">Kontinuitet och elementära funktioner</h3>
-    <p>Defintionen utgår från att gränsvärdet i <span data-math="inline">a</span> också är funktionsvärdet i <span data-math="inline">a</span>, vilket kort och gott innebär att en kontinuerlig funktion är en funktion vars graf är sammanhängande. Alla elementära funktioner är kontinuerliga i samtliga punkter inom definitionsmängden och vid gränsvärdesberäkningar behöver därmed endast de ickedefinerade punkternas gränsvärde undersökas. Dessutom är alla elementära funktioner kontinuerliga, vilket innebär att</p>
+    <p>Defintionen utgår från att gränsvärdet i <span data-math="inline">a</span> också är funktionsvärdet i <span data-math="inline">a</span>, vilket kort och gott innebär att en kontinuerlig funktion är en funktion vars graf är sammanhängande. Alla elementära funktioner är kontinuerliga i samtliga punkter inom definitionsmängden och vid gränsvärdesberäkningar behöver därmed endast de icke-definerade punkternas gränsvärde undersökas. Dessutom är alla elementära funktioner kontinuerliga, vilket innebär att</p>
     <div data-math="block">
     f \text{ är elementär} \implies f \text{ är kontinuerlig}
     </div>
@@ -437,7 +447,7 @@ img {
             <p> <span data-math="inline">f</span> är vänsterkontinuerlig i c om <span data-math="inline">\lim_{x \to c-} = f(c)</span></p>
         </li>
     </ul>
-    <p>Notera att en funktion kan vara höger eller vänsterkontinuerlig i en randpunkt. </p>
+    <p>Notera att en funktion kan vara höger- eller vänsterkontinuerlig i en randpunkt. </p>
     <h3 id="node-21">Kontinuerliga utvidningar</h3>
     <p>Funktionen <span data-math="inline">f(x)</span> går att utvidgas i <span data-math="inline">c</span> så att den förblir kontinuerlig om <span data-math="inline">\lim_{x \to c+} = \lim_{x \to c-}</span> genom att lägga till punkten <span data-math="inline">f(c) = \lim_{x \to c} f(x)</span>.</p>
     <h3 id="node-22">Kontinuerliga funktioner på slutna intervall</h3>
@@ -459,7 +469,7 @@ img {
     </div>
     <div class="theorem theorem-theorem">
         <p class="theorem-heading"><strong>Theorem (Extremvärdessatsen).</strong></p>
-        <p>Om <span data-math="inline">f</span> är en kontinuerlig funktion där <span data-math="inline">D(f) = [a, b]</span> antar <span data-math="inline">f</span> ett min och maxvärde inom <span data-math="inline">[a, b]</span>.</p>
+        <p>Om <span data-math="inline">f</span> är en kontinuerlig funktion där <span data-math="inline">D(f) = [a, b]</span> antar <span data-math="inline">f</span> ett min- och maxvärde inom <span data-math="inline">[a, b]</span>.</p>
     </div>
     <h1 id="node-23">Derivator</h1>
     <h2 id="node-24">Derivatans definition</h2>
@@ -514,10 +524,10 @@ img {
         </li>
     </ul>
     <img id="node-25" height="230px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2256.597153mm%22 %20%20%20height=%2218.636497mm%22 %20%20%20viewBox=%220%200%2056.597153%2018.636497%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22marker1%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-78.900002,-94.502847)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22M%2099.000002,101%20107,110%20l%208,-8%22 %20%20%20%20%20%20%20id=%22path5%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2080.000002,97.999997%20c%202,0%205,2.655703%205,6.000003%200,3.3443%202.656481,4.99998%204.999999,4.99999%20C%2092.343519,109%2094.000002,107%2095.000002,106%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g3%22 %20%20%20%20%20%20%20id=%22use31%22 %20%20%20%20%20%20%20transform=%22translate(19.999997,60.499996)%22 %20%20%20%20%20%20%20style=%22display:inline%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g4%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20%20%20d=%22m%2079.999999,111%203e-6,-16.000003%22 %20%20%20%20%20%20%20%20%20id=%22path20%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20%20%20d=%22m%2079.000002,110%20h%2016%22 %20%20%20%20%20%20%20%20%20id=%22path21%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g3%22 %20%20%20%20%20%20%20id=%22use31-1%22 %20%20%20%20%20%20%20transform=%22translate(8.9999973,45.499997)%22 %20%20%20%20%20%20%20style=%22display:inline%22%20/%3E %20%20%20%20%3Ccircle %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22path3%22 %20%20%20%20%20%20%20cx=%2285%22 %20%20%20%20%20%20%20cy=%22104%22 %20%20%20%20%20%20%20r=%220.22004659%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2085.000002,101.06521%20v%205.86957%22 %20%20%20%20%20%20%20id=%22path4%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g4%22 %20%20%20%20%20%20%20id=%22use4%22 %20%20%20%20%20%20%20transform=%22translate(20.000003)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g4%22 %20%20%20%20%20%20%20id=%22use5%22 %20%20%20%20%20%20%20transform=%22translate(40.000004)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22M%20119,95.999994%20127,105%22 %20%20%20%20%20%20%20id=%22path6%22%20/%3E %20%20%20%20%3Ccircle %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22path7%22 %20%20%20%20%20%20%20cx=%22127%22 %20%20%20%20%20%20%20cy=%22100%22 %20%20%20%20%20%20%20r=%220.17958444%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22M%20127.11931,100.13422%20135,109%22 %20%20%20%20%20%20%20id=%22path8%22%20/%3E %20%20%20%20%3Ccircle %20%20%20%20%20%20%20style=%22fill:%23ff4c4c;fill-opacity:1;stroke:%23ff4c4c;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22circle8%22 %20%20%20%20%20%20%20cx=%22127%22 %20%20%20%20%20%20%20cy=%22105%22 %20%20%20%20%20%20%20r=%220.17958444%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.05833px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20x=%2287.222862%22 %20%20%20%20%20%20%20y=%22112.92075%22 %20%20%20%20%20%20%20id=%22text8%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan8%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;text-align:center;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%2287.222862%22 %20%20%20%20%20%20%20%20%20y=%22112.92075%22%3EVertikal%20tangent%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.05833px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20x=%22107.01215%22 %20%20%20%20%20%20%20y=%22112.92075%22 %20%20%20%20%20%20%20id=%22text9%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan9%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;text-align:center;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%22107.01215%22 %20%20%20%20%20%20%20%20%20y=%22112.92075%22%3EByter%20riktning%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.05833px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20x=%22127.1575%22 %20%20%20%20%20%20%20y=%22112.92075%22 %20%20%20%20%20%20%20id=%22text10%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan10%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.05833px;text-align:center;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.15%22 %20%20%20%20%20%20%20%20%20x=%22127.1575%22 %20%20%20%20%20%20%20%20%20y=%22112.92075%22%3EDiskontinuerlig%3C/tspan%3E%3C/text%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
-    <p>Höger och vänsterderivatan är derivatan där endast höger respektive vänstersidan av en funktion tas hänsyn till. Det kan ibland vara smidigt att undersöka derivata från endast ett håll, exempelvis för att</p>
+    <p>Höger- och vänsterderivatan är derivatan där endast höger respektive vänstersidan av en funktion tas hänsyn till. Det kan ibland vara smidigt att undersöka derivata från endast ett håll, exempelvis för att</p>
     <ul>
         <li>
-            <p> avgöra om funktionen är deriverbar kräver att höger och vänsterdervatan är samma)</p>
+            <p> avgöra om funktionen är deriverbar kräver att höger- och vänsterdervatan är samma)</p>
         </li>
         <li>
             <p> analysera styckvisdefinerade funktioner</p>
@@ -528,7 +538,7 @@ img {
     </ul>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
-        <p>Höger och vänsterderivatan av en funktion <span data-math="inline">f</span> är en annan funktion <span data-math="inline">f'</span> definerad enligt</p>
+        <p>Höger- och vänsterderivatan av en funktion <span data-math="inline">f</span> är en annan funktion <span data-math="inline">f'</span> definerad enligt</p>
         <div data-math="block">
     f_+'(a) = \lim_{h \to 0+} \frac{f(a+h) - f(a)}{h} \\
     f_-'(a) = \lim_{h \to 0-} \frac{f(a+h) - f(a)}{h}
@@ -721,9 +731,9 @@ img {
             <p> <span data-math="inline">f</span> är strängt avtagande <span data-math="inline">D</span> om <span data-math="inline">f'(x) \lt 0</span></p>
         </li>
     </ul>
-    <p>Notera dock att <span data-math="inline">f</span> kan vara strängt växande trots att exempelvis <span data-math="inline">f'(0) = 0</span> då det inte går att välja <span data-math="inline">x_1, x_2</span> värden sådana att funktionen är plan. Detta beror på att <span data-math="inline">f'(x) = 0</span> endast i en punkt. För att förtydliga detta kan man kalla växande funktioner för ickeavtagande och vice versa.</p>
+    <p>Notera dock att <span data-math="inline">f</span> kan vara strängt växande trots att exempelvis <span data-math="inline">f'(0) = 0</span> då det inte går att välja <span data-math="inline">x_1, x_2</span> värden sådana att funktionen är plan. Detta beror på att <span data-math="inline">f'(x) = 0</span> endast i en punkt. För att förtydliga detta kan man kalla växande funktioner för icke-avtagande och vice versa.</p>
     <h2 id="node-32">Maximi och minimipunkter</h2>
-    <p>Maximi och minimipunkter är de punkter där grafen antar sitt största respektive minsta värde. En lokal maximi och minimipunkt är en punkt där grafen lokalt antar sitt extremvärde.</p>
+    <p>Maximi- och minimipunkter är de punkter där grafen antar sitt största respektive minsta värde. En lokal maximi och minimipunkt är en punkt där grafen lokalt antar sitt extremvärde.</p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
 
@@ -802,7 +812,7 @@ img {
     </ul>
     <p>Dessutom inkluderar de transcendenta funktionerna varandras inverser. </p>
     <h2 id="node-35">Injektiva funktioner</h2>
-    <p>För att en funktion ska vara inverterbar behöver den vara etttillett, även skrivet 11, vilket innebär att ett output värde endast ges av ett input värde. Funktioner som är 11 kallas injektiva.</p>
+    <p>För att en funktion ska vara inverterbar behöver den vara ett-till-ett, även skrivet 1-1, vilket innebär att ett output värde endast ges av ett input värde. Funktioner som är 1-1 kallas injektiva.</p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
         <p>Låt <span data-math="inline">f</span> vara en funktion. Om </p>
@@ -821,12 +831,12 @@ img {
     <p>Strikt växande och avtagande funktioner är injektiva. </p>
     <p>Funktioner som inte är injektiva kan göras injektiva genom att ändra definitionsmängden. Exempelvis är både funktionen <span data-math="inline">f(x): \mathbb{R^+} \to \mathbb{R}  = x^2</span> injektiv och <span data-math="inline">f(x): \mathbb{R^-} \to \mathbb{R}  = x^2</span> injektiva. </p>
     <h2 id="node-36">Inversa funktioner</h2>
-    <p>En funktion kan ses som en regel där ett värde ger ett annat värde. Invers funktion är den regel som från outputvärdet ger inputvärdet och kan exempelvis hittas genom att lösa ut <span data-math="inline">x</span> i <span data-math="inline">f(x)</span>. För att en funktion ska ha en invers bör den både vara injektiv och surjektiv.</p>
+    <p>En funktion kan ses som en regel där ett värde ger ett annat värde. Invers funktion är den regel som från output-värdet ger input-värdet och kan exempelvis hittas genom att lösa ut <span data-math="inline">x</span> i <span data-math="inline">f(x)</span>. För att en funktion ska ha en invers bör den både vara injektiv och surjektiv.</p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
 
     </div>
-    <p>Om <span data-math="inline">f</span> är 11 har den en invers funktion <span data-math="inline">f^{-1}(x)</span> som bestäms av</p>
+    <p>Om <span data-math="inline">f</span> är 1-1 har den en invers funktion <span data-math="inline">f^{-1}(x)</span> som bestäms av</p>
     <div data-math="block">
     y = f^{-1}(x) \Leftrightarrow x = f(y)
     </div>
@@ -898,7 +908,7 @@ img {
             <p> <span data-math="inline">y ln(x) = ln(x^y)</span></p>
         </li>
     </ol>
-    <p>Då den naturliga logaritmen är en 11 funktion har den en invers, vilket utnyttjas i definitionen av exponentialfunktionen.</p>
+    <p>Då den naturliga logaritmen är en 1-1 funktion har den en invers, vilket utnyttjas i definitionen av exponentialfunktionen.</p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
 
@@ -932,7 +942,7 @@ img {
     \lim_{x \to -\infty}    x^a ln x         = 0    \\
     </div>
     <h2 id="node-39">Trigonometriska funktioners inverser</h2>
-    <p>Då de trigonometriska funktionerna inte är 11 är de inte inverterbara. För att göra de trigonometriska funktionerna inverterbara begränsas deras intervall. Exempelvis begränsas sin till intervallet <span data-math="inline">[-\pi / 2, \pi / 2]</span> där den har värdemängden <span data-math="inline">[-1, 1]</span>. </p>
+    <p>Då de trigonometriska funktionerna inte är 1-1 är de inte inverterbara. För att göra de trigonometriska funktionerna inverterbara begränsas deras intervall. Exempelvis begränsas sin till intervallet <span data-math="inline">[-\pi / 2, \pi / 2]</span> där den har värdemängden <span data-math="inline">[-1, 1]</span>. </p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
 
@@ -1200,7 +1210,7 @@ img {
         </li>
     </ul>
     <h2 id="node-52">Ordo</h2>
-    <p>För att kunna jämföra funktioners tillväxttakt används begreppet ordo BigO på engelska). </p>
+    <p>För att kunna jämföra funktioners tillväxttakt används begreppet ordo Big-O på engelska). </p>
     <div class="definition">
         <p class="definition-heading"><strong>Definition.</strong></p>
         <p><span data-math="inline">f(x) = O(u(x))</span> när <span data-math="inline">x \to a</span> förutsatt att</p>
@@ -1240,7 +1250,7 @@ img {
     </div>
         <p>för vilket <span data-math="inline">s</span> är något tal mellan <span data-math="inline">a</span> och <span data-math="inline">x</span>.</p>
     </div>
-    <p>Taylorsatsen kan även skrivas upp med hjälp av ordonotation, vilket kan användas för att beräkna gränsvärden, enligt följande.</p>
+    <p>Taylorsatsen kan även skrivas upp med hjälp av ordo-notation, vilket kan användas för att beräkna gränsvärden, enligt följande.</p>
     <div data-math="block">
     f(x) = P_n(x) + O((x-a)^{n+1})
     </div>
@@ -1263,5 +1273,137 @@ img {
     \end{aligned}
     </div>
     </div>
+    <h1 id="node-56">Integraler</h1>
+    <h2 id="node-57">Obestämda och bestämda integraler</h2>
+    <p>En bestämd integral arean under en viss graf på ett intervall medan obestämda integraler är antiderivatan, även kallad primitiva funktionen. Antiderivatan till <span data-math="inline">f</span> är <span data-math="inline">F</span> om <span data-math="inline">F'(x) = f</span> och den obestämda integralen</p>
+    <div data-math="block">
+    \int f(x) dx = F(x) + C
+    </div>
+    <p>är alla antiderivator till <span data-math="inline">f</span>.</p>
+    <h2 id="node-58">Summor</h2>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Låt <span data-math="inline">f</span> vara en funktion definerad <span data-math="inline"> \forall i \in \mathbb{Z}</span></p>
+        <div data-math="block">
+    \sum_{i=m}^n f(i) = f(m) + f(m+1) + \cdots + f(n)
+    </div>
+    </div>
+    <p>// Gör klart</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Kända summor).</strong></p>
+        <div data-math="block">
+    \sum_{i=1}
+    </div>
+    </div>
+    <h2 id="node-59">Bestämda integraler</h2>
+    <p>För att veta vilket intervall approximationen</p>
+    <div data-math="block">
+    \int^{a}_{b} f(x) dx \approx \sum_{i=1}^n f(c_i) \Delta x
+    </div>
+    <p>hamnar i kan man använda sig av översumman och undersumman genom att välja <span data-math="inline">c_1 \in [x_i, x_{i + 1}]</span> i intervallet för det sämsta möjliga värdet. Översumma betecknas med <span data-math="inline">U(f, P)</span> och undersumma med <span data-math="inline">L(f, P)</span> där <span data-math="inline">P</span> är en partition. En bättre partition ökar undersumman och minskar översumman, vilket ger ett mindre intervall på approximationen. Alla kontinuerliga funktioner är integrerbara, men vissa ?) diskontinuerliga punkter men ej area kolla upp detta) funktioner är exempelvis inte integrerbara.</p>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>Låt <span data-math="inline">P</span> vara en partition av <span data-math="inline">[a, b]</span>. Om det endast finns ett värde <span data-math="inline">I</span> för alla <span data-math="inline">P</span> där</p>
+        <div data-math="block">
+    L(f, P) \le I \le U(f, P)
+    </div>
+        <p>är funktionen <span data-math="inline">f</span> integrerbar på <span data-math="inline">[a, b]</span> och </p>
+        <div data-math="block">
+    I = \int^{b}_a f(x) dx
+    </div>
+    </div>
+    <h2 id="node-60">Riemann summor</h2>
+    <p>Integralen </p>
+    <div data-math="block">
+    \int^{b}_a f(x) dx
+    </div>
+    <div class="definition">
+        <p class="definition-heading"><strong>Definition.</strong></p>
+        <p>En Riemann summa på funktionen <span data-math="inline">f</span>, partitionen <span data-math="inline">P</span> och valet av punkter <span data-math="inline">c</span> är</p>
+        <div data-math="block">
+    R(f, P, c) = \sum_{i=1}^n f(c_1) \Delta x
+    </div>
+    </div>
+    <p>Om <span data-math="inline">||P|| \to 0</span>, storleken av största intervallet i partitionen <span data-math="inline">P</span> går mot noll, gäller </p>
+    <div data-math="block">
+    \int^{b}_a f(x) dx = \lim_{n \to \infty} R(f, P, c)
+    </div>
+    <h2 id="node-61">Integralers egenskaper</h2>
+    <p>// Sats 3 s.308</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Integralers räkneregler).</strong></p>
+        <div data-math="block">
+    \begin{aligned}
+      \int_{a}^a f(x) dx &amp;= 0 \\
+      \int^{b}_b ...
+    \end{aligned}
+    </div>
+    </div>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Medelvärdessatsen för integraler).</strong></p>
+        <p>Om <span data-math="inline">f</span> är kontinuerlig på <span data-math="inline">[a, b]</span> existerer ett <span data-math="inline">c \in [a, b]</span> punkt sådan att </p>
+        <div data-math="block">
+    \int^{b}_a f(x) dx = (b - a) f(c)
+    </div>
+    </div>
+    <p>// Sats 5 313 - 314)</p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Integralkalkylens huvudsats).</strong></p>
+        <p>Låt <span data-math="inline">f</span> vara en funktion kontinuerlig på intervallet <span data-math="inline">I</span> där <span data-math="inline">a \in I</span>.</p>
+        <p><strong>Del 1</strong></p>
+        <p>Om <span data-math="inline">F</span> är definerad på <span data-math="inline">I</span> av</p>
+        <div data-math="block">
+    F(x) = \int^{x}_a f(t) dt
+    </div>
+        <p>är <span data-math="inline">F</span> deriverbar och <span data-math="inline">F'(x) = f(x)</span>.</p>
+        <p><strong>Del 2</strong></p>
+        <p>Om <span data-math="inline">G(x)</span> är någon antiderivata <span data-math="inline">G' = f</span> så är </p>
+        <div data-math="block">
+    \int^{b}_a = G(b) - G(a)
+    </div>
+    </div>
+    <p>Med hjälp av integralkalkylens huvudsats kan bestäma integraler beräknas genom att hitta en primitiv funktion.</p>
+    <h2 id="node-62">Hitta primtiva funktioner</h2>
+    <p>Det finns några metoder som kan användas för att hitta primitiva funktioner</p>
+    <ul>
+        <li>
+            <p> Gissa och testa en primitiv funktion</p>
+        </li>
+        <li>
+            <p> Om skrivningar och förenklingar av integranden</p>
+        </li>
+        <li>
+            <p> Variabelsubstitution</p>
+        </li>
+        <li>
+            <p> Partiell integration</p>
+        </li>
+        <li>
+            <p> Partialbråksuppdelning av rationella funktioner</p>
+        </li>
+    </ul>
+    <p>Tänk på att de flesta elementära funktioner har en primitiv funktion som inte är elementär själv. Det kan även vara värt att notera att integration genom substitution kommer från kedjeregeln och ...</p>
+    <h3 id="node-63">Variabelsubstitution</h3>
+    <p>Om en funktion är eller kan skrivas om till </p>
+    <div data-math="block">
+    f'(g(x)) g'(x) dx = \int f'(u) du = f(u) + C = f(g(x)) + C
+    </div>
+    <p>där <span data-math="inline">u = g(x)</span></p>
+    <p>Tänk på att även <span data-math="inline">dx</span> måste substitueras med <span data-math="inline">du</span>. </p>
+    <p>// Tabell 320 förutom se modulbladet) kom ihåg 15 och 16</p>
+    <h3 id="node-64">Partiell integration</h3>
+    <p>Partiell integration bygger på produktregeln för derivata och kan användas då den primitiva funktionen till <span data-math="inline">f</span> är lättare att hitta än primitiva funktionen till <span data-math="inline">g</span>. </p>
+    <div class="theorem theorem-theorem">
+        <p class="theorem-heading"><strong>Theorem (Partiell integration).</strong></p>
+        <p>Låt <span data-math="inline">F'(x) = f(x)</span></p>
+        <div data-math="block">
+    \begin{aligned}
+      \int f'(x) g(x) dx &amp;= f(x) g(x) - \int f(x) g'(x) dx \\
+      &amp;\Updownarrow \\
+      \int f(x) g(x) dx &amp;= F(x) g(x) - \int F(x) g'(x) dx \\
+    \end{aligned}
+    </div>
+    </div>
+    <p>// Lägg till om trick med att sätta fx) = 1 för funktioner där int g är svår att hitta</p>
 </body>
 </html>
