@@ -14,31 +14,38 @@
 </head>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-    // Render elements matching data-math="block"
-    document.querySelectorAll('[data-math="block"]').forEach(function(element) {
-        // Clean up HTML-escaped strings for proper LaTeX parsing
-        let cleanTex = element.textContent
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
+        // Define macros inside a dedicated macros object
+        const katexOptions = {
+            displayMode: true,
+            throwOnError: false,
+            macros: {
+                "\\arraystretch": "3" // Adjust this multiplier as needed
+            }
+        };
 
-        katex.render(cleanTex, element, {
-        displayMode: true,
-        throwOnError: false
-        });
-    });
-    document.querySelectorAll('[data-math="inline"]').forEach(function(element) {
-        // Clean up HTML-escaped strings for proper LaTeX parsing
-        let cleanTex = element.textContent
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
+        document.querySelectorAll('[data-math="block"]').forEach(function(element) {
+            let cleanTex = element.textContent
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&');
 
-        katex.render(cleanTex, element, {
-        displayMode: false,
-        throwOnError: false
+            katex.render(cleanTex, element, {
+                ...katexOptions,
+                displayMode: true
+            });
         });
-    });
+
+        document.querySelectorAll('[data-math="inline"]').forEach(function(element) {
+            let cleanTex = element.textContent
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .replace(/&amp;/g, '&');
+
+            katex.render(cleanTex, element, {
+                ...katexOptions,
+                displayMode: false
+            });
+        });
     });
 </script>
 
@@ -63,7 +70,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: 18px;
 }
 
 body {
@@ -78,6 +84,11 @@ body {
   border: 1px solid var(--border-color);
   border-radius: var(--radius);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+}
+
+.katex {
+    font-size: 1.1em;
 }
 
 /* Headings */
@@ -204,7 +215,24 @@ li p {
 
 }
 
+table {
+  width: 100%;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+}
 
+table tr:nth-child(2n) {
+  background-color: hsl(210, 20%, 95%);
+}
+
+
+
+table td,
+table th {
+  padding: 8px;
+  border-radius: 4px;
+}
 </style></head>
 <body>
     <h1 id="node-0">Introduktion</h1>
@@ -1855,7 +1883,10 @@ li p {
     <p>Det går att avgöra om integraler vars primitiva funktion inte existerar är divergenta eller konvergenta genom att jämföra dessa med en integral som är mindre eller större än   </p>
     <div class="theorem theorem-theorem" id="node-149">
         <p class="theorem-heading"><strong>Theorem (Integralers storlek).</strong></p>
-        <p>Om <span data-math="inline">f</span> och <span data-math="inline">g</span> är kontinuerliga och <span data-math="inline">0 \le f(x) \le g(x)</span> på <span data-math="inline">(a, b)</span></p>
+        <p>Om <span data-math="inline">f</span> och <span data-math="inline">g</span> är kontinuerliga och <span data-math="inline">0 \le f(x) \le g(x)</span> på <span data-math="inline">(a, b)</span> gäller</p>
+        <div data-math="block">
+    0 \le \int_a^b f(x) \le \int_a^b g(x) 
+    </div>
     </div>
     <div class="definition" id="node-150">
         <p class="definition-heading"><strong>Definition (Generaliserade integraler av obegränsade funktioner).</strong></p>
@@ -1868,13 +1899,26 @@ li p {
     \int _{a}^{b} f(x) dx = \lim_{c \to b^-} \int_{a}^{c} f(x) dx
     </div>
     </div>
-    <h2 id="node-151">Talföljder och serier</h2>
+    <div class="example" id="node-151">
+        <p class="example-heading"><strong>Example (Konvergens med integrand på obestämd form).</strong></p>
+        <p>Avgör om integralen</p>
+        <div data-math="block">
+    \int_a^{\infty} x^a e^{-x} dx 
+    </div>
+        <p>konvergerar. </p>
+        <p>Vi vet att <span data-math="inline">\exists X: x^a \lt e^{x/2}</span> där <span data-math="inline">a \lt X \lt x</span>. Detta innebär att <span data-math="inline">x^a e^{-x} \lt e^{x/2} e^{-x} \lt e^{-x/2}</span> och därmed</p>
+        <div data-math="block">
+    \int_X^{\infty} x^a e^{-x} dx \le \int_X^{\infty} e^{-x/2} dx &lt; \infty
+    </div>
+        <p><strong>Svar:</strong> Integralen konvergerar</p>
+    </div>
+    <h2 id="node-152">Talföljder och serier</h2>
     <p>En talföljd är en oändlig följd av tal och en serie är summan av en sådan talföljd. En partialsumma är summan av alla element i en serie upp till ett visst tal. </p>
-    <div class="definition" id="node-152">
+    <div class="definition" id="node-153">
         <p class="definition-heading"><strong>Definition (Gränsvärdet av en serie).</strong></p>
         <p>En talföljd är konvergent mot <span data-math="inline">L</span> om <span data-math="inline">\forall \epsilon &gt; 0 \exists N</span> så att <span data-math="inline">|a_n - a| &lt; \epsilon</span> för alla <span data-math="inline">n \ge N</span>.</p>
     </div>
-    <div class="definition" id="node-153">
+    <div class="definition" id="node-154">
         <p class="definition-heading"><strong>Definition (Seriers konvergens).</strong></p>
         <p>Serien </p>
         <div data-math="block">
@@ -1887,26 +1931,26 @@ li p {
         <p>Om gränsvärdet inte existerar eller är <span data-math="inline">\pm\infty</span> är serien divergent.</p>
     </div>
     <p>Av definitionerna följer några satser:</p>
-    <div class="theorem theorem-theorem" id="node-154">
+    <div class="theorem theorem-theorem" id="node-155">
         <p class="theorem-heading"><strong>Theorem (Divergenstest för serier).</strong></p>
         <p><span data-math="inline">\sum_{n=1}^{\infty} a_n</span> konvergerar <span data-math="inline">\implies \lim_{n \to \infty} a_n = 0</span></p>
         <p>eller</p>
         <p><span data-math="inline">\lim_{n \to \infty} a_n \neq 0</span> eller om gränsvärdet inte existerar  <span data-math="inline">\implies \sum_{n=1}^{\infty} a_n</span> divergerar </p>
     </div>
-    <div class="theorem theorem-theorem" id="node-155">
+    <div class="theorem theorem-theorem" id="node-156">
         <p class="theorem-heading"><strong>Theorem (Partialsummor och seriers konvergens).</strong></p>
         <p><span data-math="inline">\sum_{n=1}^{\infty} a_n</span> konvergerar <span data-math="inline">\iff \sum_{n=N}^{\infty} a_n</span> konvergerar där <span data-math="inline">N \ge 1</span></p>
     </div>
-    <div class="theorem theorem-theorem" id="node-156">
+    <div class="theorem theorem-theorem" id="node-157">
         <p class="theorem-heading"><strong>Theorem (Summan för en geometrisk talföljd).</strong></p>
         <p>Summan för geometriska talföljder är</p>
         <div data-math="block">
     \sum_{k = 0}^n r^k = \frac{1-r^{n+1}}{1-r}
     </div>
     </div>
-    <h3 id="node-157">Undersöka seriers konvergens</h3>
+    <h3 id="node-158">Undersöka seriers konvergens</h3>
     <p>Att undersöka huruvida en serie konvergerar kan vara krångligt och det kan vara enklare att använda några av satserna nedan. </p>
-    <div class="theorem theorem-theorem" id="node-158">
+    <div class="theorem theorem-theorem" id="node-159">
         <p class="theorem-heading"><strong>Theorem (Jämförelse av seriers konvergens).</strong></p>
         <p>Om <span data-math="inline">0 \le a_n \le b_n</span> för alla <span data-math="inline">n</span> gäller</p>
         <ul>
@@ -1918,7 +1962,7 @@ li p {
             </li>
         </ul>
     </div>
-    <div class="theorem theorem-theorem" id="node-159">
+    <div class="theorem theorem-theorem" id="node-160">
         <p class="theorem-heading"><strong>Theorem (Cauchys jämförelsesats).</strong></p>
         <p>Om <span data-math="inline">f</span> är en positiv, kontinuerlig och avtagande funktion på <span data-math="inline">x \ge 1</span> gäller antingen att </p>
         <div data-math="block">
@@ -1933,7 +1977,7 @@ li p {
             </li>
         </ol>
     </div>
-    <div class="theorem theorem-theorem" id="node-160">
+    <div class="theorem theorem-theorem" id="node-161">
         <p class="theorem-heading"><strong>Theorem (Kvotkriteriet).</strong></p>
         <p>Om <span data-math="inline">a_n \gt 0</span> och </p>
         <div data-math="block">
@@ -1953,7 +1997,7 @@ li p {
         </ol>
     </div>
     <p>Istället för kvotkriteriet kan man använda sig av det liknande gränsvärdesjämförelsekritieret som istället jämför med en annan serie vars konvergens är känd.</p>
-    <div class="theorem theorem-theorem" id="node-161">
+    <div class="theorem theorem-theorem" id="node-162">
         <p class="theorem-heading"><strong>Theorem (Gränsvärdesjämförelsekritieriet).</strong></p>
         <p>Låt <span data-math="inline">a_n</span> och <span data-math="inline">b_n</span> vara positiva serier och gränsvärdet</p>
         <div data-math="block">
@@ -1981,7 +2025,7 @@ li p {
         </li>
     </ul>
     <p>För att kunna jämföra olika seriers konvergens kan det vara användbart att känna till några seriers konvergens.</p>
-    <div class="theorem theorem-theorem" id="node-162">
+    <div class="theorem theorem-theorem" id="node-163">
         <p class="theorem-heading"><strong>Theorem (p-seriers konvegens).</strong></p>
         <p>p-serien</p>
         <div data-math="block">
@@ -1996,8 +2040,8 @@ li p {
             </li>
         </ul>
     </div>
-    <h2 id="node-163">Potensserier</h2>
-    <div class="definition" id="node-164">
+    <h2 id="node-164">Potensserier</h2>
+    <div class="definition" id="node-165">
         <p class="definition-heading"><strong>Definition (Potensserie).</strong></p>
         <p>En potensserie är en serie på formen</p>
         <div data-math="block">
@@ -2005,35 +2049,35 @@ li p {
     </div>
         <p>där <span data-math="inline">a_n</span> är seriens koefficienter och <span data-math="inline">c</span> är en konstant.</p>
     </div>
-    <div class="definition" id="node-165">
+    <div class="definition" id="node-166">
         <p class="definition-heading"><strong>Definition (Taylor serier).</strong></p>
         <p>Om <span data-math="inline">f</span> är en funktion och alla ordningens derivator till <span data-math="inline">f</span> existerar är taylorpolynomet i <span data-math="inline">c</span> till <span data-math="inline">f</span></p>
         <div data-math="block">
     \sum_{k = 0}^{\infty} \frac{f^{(k)}(c)}{k!} (x - c)^k
     </div>
     </div>
-    <h2 id="node-166">Approximera summor</h2>
+    <h2 id="node-167">Approximera summor</h2>
     <div data-math="block">
     s_N = s - E = \sum_{i = 0}^{\infty} a_i - E 
     </div>
-    <h1 id="node-167">Tillämpningar av integraler</h1>
-    <h2 id="node-168">Volymberäkningar med skivmetoden</h2>
+    <h1 id="node-168">Tillämpningar av integraler</h1>
+    <h2 id="node-169">Volymberäkningar med skivmetoden</h2>
     <p>Skivmetoden går ut på att dela upp en volym i skivor med känd tvärsnittsarea längs med en axel. Förändringen av volymen kan ställas upp som Riemansumma.</p>
     <div data-math="block">
     \sum \Delta v_i = \int_{a}^{b} A(x) dx
     </div>
-    <img id="node-169" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2235.657043mm%22 %20%20%20height=%2230.547384mm%22 %20%20%20viewBox=%220%200%2035.657043%2030.547385%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle-3%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135-8%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer2%22 %20%20%20%20%20style=%22display:inline%22 %20%20%20%20%20transform=%22translate(-3.464106,-1.9997681)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22M%2073.612155,72.499998%2090.932668,82.499999%22 %20%20%20%20%20%20%20id=%22path2%22 %20%20%20%20%20%20%20transform=%22translate(-69.18203,-50.002847)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use3%22 %20%20%20%20%20%20%20transform=%22translate(4.3301269,-2.4999995)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use4%22 %20%20%20%20%20%20%20transform=%22translate(12.990386,-7.5)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use6%22 %20%20%20%20%20%20%20transform=%22translate(17.320513,-10)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22M%2095.262794,64.999998%2077.942284,74.999999%22 %20%20%20%20%20%20%20id=%22path6%22 %20%20%20%20%20%20%20transform=%22translate(-69.18203,-50.002847)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use7%22 %20%20%20%20%20%20%20transform=%22translate(4.330127,2.5000001)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use8%22 %20%20%20%20%20%20%20transform=%22translate(8.6602541,4.9999995)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use9%22 %20%20%20%20%20%20%20transform=%22translate(12.990384,7.5)%22%20/%3E %20%20%3C/g%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-72.646136,-52.002617)%22%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g5%22 %20%20%20%20%20%20%20transform=%22translate(1.7320546,0.99999533)%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20id=%22path3%22 %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.211474;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20transform=%22matrix(0.89442719,-0.44721359,0,1,0,0)%22 %20%20%20%20%20%20%20%20%20d=%22m%20104.66581,117.96633%20a%203.0000014,3.0000014%200%200%201%20-3,3%203.0000014,3.0000014%200%200%201%20-3.000002,-3%203.0000014,3.0000014%200%200%201%203.000002,-3%203.0000014,3.0000014%200%200%201%203,3%20z%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20id=%22circle4%22 %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.211474;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20transform=%22matrix(0.89442719,-0.44721359,0,1,0,0)%22 %20%20%20%20%20%20%20%20%20d=%22m%2098.600238,119.17837%20c%20-0.556977,-0.54467%20-0.902675,-1.30449%20-0.902676,-2.14505%20-2e-6,-1.65685%201.343144,-3%202.999998,-3%201.05203,0%201.97758,0.54151%202.51312,1.36101%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.255;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22M%2092.794549,69.408791%2091.928507,68.908792%22 %20%20%20%20%20%20%20%20%20id=%22path5%22%20/%3E %20%20%20%20%20%20%3Cuse %20%20%20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20%20%20xlink:href=%22%23path5%22 %20%20%20%20%20%20%20%20%20id=%22use5%22 %20%20%20%20%20%20%20%20%20transform=%22translate(-3.7378203,6.1742877)%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.255;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2082.272411,67.499998%20c%2010.10363,3.885149%2017.3205,2.660251%2021.650629,-3.674686%22 %20%20%20%20%20%20%20id=%22path10%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2082.272414,67.5%20V%2052.499999%22 %20%20%20%20%20%20%20id=%22path20%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2082.272414,67.499999%20100.45895,78%22 %20%20%20%20%20%20%20id=%22path21%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2072.746136,73%2091.798695,62%22 %20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g10%22 %20%20%20%20%20%20%20transform=%22translate(4.0298888,2.2744878)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%2092.079554,62.307383%200.251544,-0.614767%20-1.064806,0.145231%20z%22 %20%20%20%20%20%20%20id=%22path9%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%2081.865784,52.527844%200.406632,-0.525227%200.40663,0.994765%20z%22 %20%20%20%20%20%20%20id=%22path11%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%20100.73981,77.692616%200.25154,0.614767%20-1.064803,-0.145231%20z%22 %20%20%20%20%20%20%20id=%22path12%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    <img id="node-170" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2235.657043mm%22 %20%20%20height=%2230.547384mm%22 %20%20%20viewBox=%220%200%2035.657043%2030.547385%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle-3%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135-8%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer2%22 %20%20%20%20%20style=%22display:inline%22 %20%20%20%20%20transform=%22translate(-3.464106,-1.9997681)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.25%22 %20%20%20%20%20%20%20d=%22M%2073.612155,72.499998%2090.932668,82.499999%22 %20%20%20%20%20%20%20id=%22path2%22 %20%20%20%20%20%20%20transform=%22translate(-69.18203,-50.002847)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use3%22 %20%20%20%20%20%20%20transform=%22translate(4.3301269,-2.4999995)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use4%22 %20%20%20%20%20%20%20transform=%22translate(12.990386,-7.5)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path2%22 %20%20%20%20%20%20%20id=%22use6%22 %20%20%20%20%20%20%20transform=%22translate(17.320513,-10)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.25%22 %20%20%20%20%20%20%20d=%22M%2095.262794,64.999998%2077.942284,74.999999%22 %20%20%20%20%20%20%20id=%22path6%22 %20%20%20%20%20%20%20transform=%22translate(-69.18203,-50.002847)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use7%22 %20%20%20%20%20%20%20transform=%22translate(4.330127,2.5000001)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use8%22 %20%20%20%20%20%20%20transform=%22translate(8.6602541,4.9999995)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path6%22 %20%20%20%20%20%20%20id=%22use9%22 %20%20%20%20%20%20%20transform=%22translate(12.990384,7.5)%22%20/%3E %20%20%3C/g%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-72.646136,-52.002617)%22%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g5%22 %20%20%20%20%20%20%20transform=%22translate(1.7320546,0.99999533)%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20id=%22path3%22 %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.211474;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20transform=%22matrix(0.89442719,-0.44721359,0,1,0,0)%22 %20%20%20%20%20%20%20%20%20d=%22m%20104.66581,117.96633%20a%203.0000014,3.0000014%200%200%201%20-3,3%203.0000014,3.0000014%200%200%201%20-3.000002,-3%203.0000014,3.0000014%200%200%201%203.000002,-3%203.0000014,3.0000014%200%200%201%203,3%20z%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20id=%22circle4%22 %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.211474;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20transform=%22matrix(0.89442719,-0.44721359,0,1,0,0)%22 %20%20%20%20%20%20%20%20%20d=%22m%2098.600238,119.17837%20c%20-0.556977,-0.54467%20-0.902675,-1.30449%20-0.902676,-2.14505%20-2e-6,-1.65685%201.343144,-3%202.999998,-3%201.05203,0%201.97758,0.54151%202.51312,1.36101%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.255;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22M%2092.794549,69.408791%2091.928507,68.908792%22 %20%20%20%20%20%20%20%20%20id=%22path5%22%20/%3E %20%20%20%20%20%20%3Cuse %20%20%20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20%20%20xlink:href=%22%23path5%22 %20%20%20%20%20%20%20%20%20id=%22use5%22 %20%20%20%20%20%20%20%20%20transform=%22translate(-3.7378203,6.1742877)%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff4c4c;stroke-width:0.255;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2082.272411,67.499998%20c%2010.10363,3.885149%2017.3205,2.660251%2021.650629,-3.674686%22 %20%20%20%20%20%20%20id=%22path10%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2082.272414,67.5%20V%2052.499999%22 %20%20%20%20%20%20%20id=%22path20%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2082.272414,67.499999%20100.45895,78%22 %20%20%20%20%20%20%20id=%22path21%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22display:inline;fill:none;stroke:%23000000;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22M%2072.746136,73%2091.798695,62%22 %20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g10%22 %20%20%20%20%20%20%20transform=%22translate(4.0298888,2.2744878)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%2092.079554,62.307383%200.251544,-0.614767%20-1.064806,0.145231%20z%22 %20%20%20%20%20%20%20id=%22path9%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%2081.865784,52.527844%200.406632,-0.525227%200.40663,0.994765%20z%22 %20%20%20%20%20%20%20id=%22path11%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0999999;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:0.5%22 %20%20%20%20%20%20%20d=%22m%20100.73981,77.692616%200.25154,0.614767%20-1.064803,-0.145231%20z%22 %20%20%20%20%20%20%20id=%22path12%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
     <p>Rotationsvolymen för en funktion runt <span data-math="inline">x</span>-axeln kan härledas med hjälp av formeln ovan.</p>
-    <div class="theorem theorem-theorem" id="node-170">
+    <div class="theorem theorem-theorem" id="node-171">
         <p class="theorem-heading"><strong>Theorem (Rotationsvolym).</strong></p>
         <p>Rotationsvolymen från <span data-math="inline">a</span> till <span data-math="inline">b</span> för funktionen <span data-math="inline">f</span> ges av</p>
         <div data-math="block">
     V = \pi \int_{a}^{b} (f(x))^2 dx
     </div>
     </div>
-    <h2 id="node-171">Volymberäkningar med skalmetoden</h2>
+    <h2 id="node-172">Volymberäkningar med skalmetoden</h2>
     <p>Volymen kan också delas upp i smala cylindriska skal och volymförändringen ges av skalets tvärsnittsarea. Tvärsnittsarean ges av <span data-math="inline">2 \pi \Delta x y</span>, vilket ger volymförändringen enligt satsen. </p>
-    <div class="theorem theorem-theorem" id="node-172">
+    <div class="theorem theorem-theorem" id="node-173">
         <p class="theorem-heading"><strong>Theorem (Volym med skalmetoden).</strong></p>
         <p>För ett skal gäller</p>
         <div data-math="block">
@@ -2044,15 +2088,15 @@ li p {
     V = \int_b^a 2 \pi x f(x) dx
     </div>
     </div>
-    <h2 id="node-173">Båglängder</h2>
+    <h2 id="node-174">Båglängder</h2>
     <p>En båglängd är längden av en böjd kurva. </p>
-    <div class="theorem theorem-theorem" id="node-174">
+    <div class="theorem theorem-theorem" id="node-175">
         <p class="theorem-heading"><strong>Theorem (Båglängd).</strong></p>
         <div data-math="block">
     S = \int_a^b \sqrt{1 + \frac{dy}{dx}^2} dx
     </div>
     </div>
-    <h3 id="node-175">Parameterkurvor</h3>
+    <h3 id="node-176">Parameterkurvor</h3>
     <p>Det finns tre sätt att beskriva kurvor i ett plan</p>
     <ol>
         <li>
@@ -2066,19 +2110,19 @@ li p {
         </li>
     </ol>
     <p>Parametriserade kurvor byggs upp med hjälp av en parameter, oftast betecknad <span data-math="inline">t</span>, där punktens koordinater beror av <span data-math="inline">t</span>. Det kan vara bra att notera att det finns oändligt många parametriseringar av en kurva och variationer kan göras med hjälp av variabelbyte. </p>
-    <div class="definition" id="node-176">
+    <div class="definition" id="node-177">
         <p class="definition-heading"><strong>Definition (Parametriserade kurvor).</strong></p>
         <p>En parametrisk kurva beskrivs av samtliga punkter <span data-math="inline">(x(t), y(t))</span> där <span data-math="inline">x</span> och <span data-math="inline">y</span> är kontinuerliga funktioner. </p>
     </div>
     <p>Funktionsgrafer kan enkelt parametriseras genom att välja parametern <span data-math="inline">t</span> som <span data-math="inline">x</span>, alltså parametriseras <span data-math="inline">f(x)</span> som <span data-math="inline">(f(t), x = t)</span>.</p>
-    <h3 id="node-177">Längden av en parametriserad kurva</h3>
-    <div class="theorem theorem-theorem" id="node-178">
+    <h3 id="node-178">Längden av en parametriserad kurva</h3>
+    <div class="theorem theorem-theorem" id="node-179">
         <p class="theorem-heading"><strong>Theorem (Längden av en parametriserad kurva).</strong></p>
         <div data-math="block">
     S = \int_a^b \sqrt{  \left(  \frac{dx}{dt}  \right)^2    +    \left(  \frac{dy}{dt}  \right)^2} dt
     </div>
     </div>
-    <div class="theorem theorem-theorem" id="node-179">
+    <div class="theorem theorem-theorem" id="node-180">
         <p class="theorem-heading"><strong>Theorem (Volymsformeln).</strong></p>
         <div data-math="block">
     dV = A(x) dx
