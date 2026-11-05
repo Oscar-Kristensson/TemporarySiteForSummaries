@@ -710,5 +710,307 @@ table th {
     <p>Spänningarna är standardiserade och har marginal, mottagaren har större marginal än sändaren (denna skillnad är Brusmarginalen)</p>
     <p>Olika system har olika spänningar, värt att vara försiktig med detta</p>
     <p>Bör ha en buffar</p>
+    <h1 id="node-50">Booelsk algebra</h1>
+    <p>I denna kurs används den booelska algebran för att gå från sanningstabell till booelsk algebra och bygga en viss sanningstabell med logiska grindar.</p>
+    <p>Noder: Inputs, outputs, interna punkter</p>
+    <p>Kretselementen numrreras också</p>
+    <p>Två typer av logik:</p>
+    <ul>
+        <li>
+            <p> Kombinatorisk (minneslös), går att beskriva med sanningstabell</p>
+        </li>
+        <li>
+            <p> Sekventiell (minnesbaserad)</p>
+        </li>
+    </ul>
+    <p>Kombinatorisk logik kräver:</p>
+    <ul>
+        <li>
+            <p> Kombinatoriska element består av kombinatoriska element</p>
+        </li>
+        <li>
+            <p> Varje nod är exakt en utsignal</p>
+        </li>
+        <li>
+            <p> Inga cykliska kopplingar</p>
+        </li>
+    </ul>
+    <h2 id="node-51">Booelska ekvationer</h2>
+    <ul>
+        <li>
+            <p> Utsignalen funktion av insignalerna</p>
+        </li>
+    </ul>
+    <div class="definition" id="node-52">
+        <p class="definition-heading"><strong>Definition (Komplement/Invers).</strong></p>
+        <p><span data-math="inline">\overline{A}</span> ger motsatt sanningsvärde</p>
+    </div>
+    <p>Litteraler: Variabler och deras komplement</p>
+    <p>Implikant: Produkter av litteraler</p>
+    <p>Minterm: Produkt som innehåller varje variabel (eller en enskild variabels invers)</p>
+    <p>Maxterm: Summa av samtliga inputvariabler</p>
+    <h2 id="node-53">Sanningstabeller till SOP-form</h2>
+    <p>Summa av produkt form (Sum of products, dvs SOP)(OR av AND uttr)</p>
+    <table>
+        <tr>
+            <td>
+                <p>A</p>
+            </td>
+            <td>
+                <p>B</p>
+            </td>
+            <td>
+                <p>Y</p>
+            </td>
+            <td>
+                <p>Minterm</p>
+            </td>
+            <td>
+                <p>Minterm namn</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p><span data-math="inline">\overline{A}\overline{B}</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">m_0</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p><span data-math="inline">\overline{A}B</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">m_1</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p><span data-math="inline">A\overline{B}</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">m_2</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p><span data-math="inline">AB</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">m_3</span></p>
+            </td>
+        </tr>
+    </table>
+    <p>Mintermen är representerar en och endast en rad. Dessa numreras.</p>
+    <p>Ta eller av raderna som ger ett i sanningstabellen</p>
+    <div data-math="block">
+    \implies Y = F(A, B) = \overline{A}B + AB = \sum(1, 3) \\
+    = B (\overline{A} + A) = 1 \text{ booelska förenklingar }
+    </div>
+    <h2 id="node-54">Sanningstabeller på POS-form</h2>
+    <p>Produkt av summor</p>
+    <ol>
+        <li>
+            <p> Maxtermen är falsk för endast en rad</p>
+        </li>
+        <li>
+            <p> Produkt av summorna med 0</p>
+        </li>
+    </ol>
+    <table>
+        <tr>
+            <td>
+                <p>A</p>
+            </td>
+            <td>
+                <p>B</p>
+            </td>
+            <td>
+                <p>Y</p>
+            </td>
+            <td>
+                <p>Maxterm</p>
+            </td>
+            <td>
+                <p>Maxterm namn</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p><span data-math="inline">A + B</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">M_0</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p><span data-math="inline">A + \overline{B}</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">N_1</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p><span data-math="inline">\overline{A} + B</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">N_2</span></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p><span data-math="inline">\overline{A} + \overline{B}</span></p>
+            </td>
+            <td>
+                <p><span data-math="inline">M_3</span></p>
+            </td>
+        </tr>
+    </table>
+    <div data-math="block">
+    \implies Y = F(A, B) = (A + B) (\overline{A} + B) = \prod (0, 2) \\
+    = A \overline{A} + AB + B \overline{A} + BB \text{ boolska förenklingar } \\
+    = AB + B \overline{A} + B \text{ boolska förenklingar } \\
+    = B + AB + \overline{A} + B \text{ ändring av ordning } \\
+    = B(1 + A + \overline{A}) \text{ boolska förenklingar } \\
+    = B \text{ boolska förenklingar }
+    </div>
+    <ul>
+        <li>
+            <p> Få ettor -&gt; SOP (bara NAND)</p>
+        </li>
+        <li>
+            <p> Få nollor -&gt; POS (bara NOR)</p>
+        </li>
+    </ul>
+    <div class="theorem theorem-theorem" id="node-55">
+        <p class="theorem-heading"><strong>Theorem (DeMorgans sats).</strong></p>
+        <div data-math="block">
+    \overline{m_i} = M_i
+    </div>
+    </div>
+    <p>För varje SOP finns en tillhörande POS</p>
+    <h2 id="node-56">DeMorgan's Theorem</h2>
+    <div class="theorem theorem-theorem" id="node-57">
+        <p class="theorem-heading"><strong>Theorem (De Morgan's lag).</strong></p>
+        <div data-math="block">
+    \begin{aligned}
+      \overline{B_0 \cdot B_1 \cdots B_n} &amp;= \overline{B_0} + \overline{B_1} + \cdots + \overline{B_n} \\
+      \overline{B_0 + B_1 + B_n} &amp;= \overline{B_0} \cdot \overline{B_1} \cdots \overline{B_n} \\
+    \end{aligned}
+    </div>
+    </div>
+    <h2 id="node-58">Trick med grindar</h2>
+    <h2 id="node-59">Universella grind set</h2>
+    <p><span class="concept">Universella grindar</span> är grindar som kan användas till att bygga samtliga logiska funktioner. </p>
+    <h2 id="node-60">Logiska funktioner med NAND grindar</h2>
+    <p>Logiska funktioner kan implementeras med NAND grindar genom att följande process. Smidigt med SOP uttryck.</p>
+    <h2 id="node-61">Grundregler för kopplingsscheman</h2>
+    <ul>
+        <li>
+            <p> Inparametrar bör placeras till vänster eller i toppen</p>
+        </li>
+        <li>
+            <p> Utparametrar bör placeras till höger eller i botten</p>
+        </li>
+        <li>
+            <p> Grindar går från vänster till höger</p>
+        </li>
+        <li>
+            <p> Använd endast raka ledare</p>
+        </li>
+        <li>
+            <p> I en T-korsning kopplas samtliga ledare ihop </p>
+        </li>
+        <li>
+            <p> I en fyrvägskorsning med prickar kopplas ledarna i mitten, annars inte</p>
+        </li>
+    </ul>
+    <p>Godtyckliga funktioner i CMOS</p>
+    <ol>
+        <li>
+            <p> Förenkla funktionen så attt den nedast består av primitiverna <span data-math="inline">A + B</span>, <span data-math="inline">A \cdot B</span>, <span data-math="inline">\overline{A} + \overline{B}</span> och <span data-math="inline">\overline{A} \cdot \overline{B}</span>.</p>
+        </li>
+        <li>
+            <p> Pull up kretsen <span data-math="inline">f</span> byggs genom att invertera litteralerna</p>
+        </li>
+        <li>
+            <p> Pull down kretsen byggs genom att invertera <span data-math="inline">f</span> i primitiver</p>
+        </li>
+    </ol>
 </body>
 </html>
