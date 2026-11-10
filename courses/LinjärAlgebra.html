@@ -9,7 +9,7 @@
 
 <!-- KaTeX JS & Auto-render extension -->
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body);"></script>
 </head>
 <script>
@@ -19,7 +19,9 @@
             displayMode: true,
             throwOnError: false,
             macros: {
-                "\\arraystretch": "3" // Adjust this multiplier as needed
+                "\\arraystretch": "1" // Adjust this multiplier as needed.
+                // NOTE: There is a problem with setting this and rendering matricies
+                // NOTE: Changed the parameter from 3 -> 1 to resolve matrix rendering spacing issues
             }
         };
 
@@ -233,6 +235,7 @@ table th {
   padding: 8px;
   border-radius: 4px;
 }
+
 </style></head>
 <body>
     <h1 id="node-0">Vektorer</h1>
@@ -526,7 +529,7 @@ table th {
         </ul>
         <p>är gäller <span data-math="inline">A = B</span></p>
     </div>
-    <p>Vanligvis betraktas vektorer <span data-math="inline">\vec{x} \in \mathbb{R}^n</span> som kolumnvektorer. Detta gör att en matris går att skrivas med vektorer i varje kolumn:</p>
+    <p>Vanligvis betraktas vektorer <span data-math="inline">\vec{x} \in \mathbb{R}^n</span> som kolumnvektorer. Detta gör att en matris går att skriva med vektorer i varje kolumn:</p>
     <div data-math="block">
     A = \begin{bmatrix}
        \vec{a_1} &amp;&amp; \vec{a_2} &amp;&amp; \cdots &amp;&amp; \vec{a_n}
@@ -554,7 +557,7 @@ table th {
         </ul>
     </div>
     <h3 id="node-41">Radoperationer</h3>
-    <p>Matriser kan användas för att representera ekvationssystem. Detta görs genom att sätta ihop flera konstantvektorer och sätta in dessa i matrisens rader. Hela matrisen kallas för <span class="concept">totalmatris</span> och alla rader till vänster kallas för en <span class="concept">koefficientmatris</span>.</p>
+    <p>Matriser kan användas för att representera ekvationssystem. Detta görs genom att sätta ihop flera konstantvektorer och sätta in dessa i matrisens rader. Hela matrisen kallas för <span class="concept">totalmatris</span> och alla rader förutom den högersta kallas för en <span class="concept">koefficientmatris</span>.</p>
     <div class="theorem theorem-theorem" id="node-42">
         <p class="theorem-heading"><strong>Theorem (Elementära radoperation).</strong></p>
         <p>Följande operationer ändrar inte ekvationssystemets lösningsmängd:</p>
@@ -570,9 +573,9 @@ table th {
             </li>
         </ul>
     </div>
-    <p>För att beteckna att två matriser ger samma lösningsmängd används relationen <span data-math="inline">~</span>.</p>
+    <p>För att beteckna att två matriser ger samma lösningsmängd används relationen <span data-math="inline">\sim</span>.</p>
     <h3 id="node-43">Gausseliminering</h3>
-    <p>Gausseliminering går ut på att utföra radoperationer för att få en trappmatris, alltså en matris med nollor under diagonalen. Det ekvationssystemet kan lösas med bakåtsubstitution eller att utföra ytterligare radoperationer för att få en enhetsmatris. Att kombinera gausseliminering med ytterligare radoperationer kallas för gauss-jordanmetoden. Enhetsmatrisen består enbart av ettor på diagonalen och kallas ibland för reducerad trappform.</p>
+    <p>Gausseliminering går ut på att utföra radoperationer för att få en trappmatris, alltså en matris med nollor under diagonalen. Det ekvationssystemet kan lösas med bakåtsubstitution eller att utföra ytterligare radoperationer för att få en enhetsmatris. Att kombinera gausseliminering med ytterligare radoperationer kallas för gauss-jordanmetoden. Enhetsmatrisen, även kallad identitetsmatrisen, består enbart av ettor på diagonalen och kallas ibland för reducerad trappform.</p>
     <div data-math="block">
     \left[
     \begin{array}{cc|c}
@@ -581,7 +584,7 @@ table th {
     \end{array}
     \right]
     </div>
-    <p>Variabler med en ledande etta kallas för ledande variabler och det går att lösa ut dessa i termer av de övriga, såkallade fria, variablerna. De fria variablerna utgör då parametrar. Alla ekvationssystem ger inte parameterlösningar och har därmed inte fria variabler.  Om raderna ger en omöjligekvation är ekvationssystemet inkonsistent.</p>
+    <p>Variabler med en ledande etta kallas för ledande variabler och det går att lösa ut dessa i termer av de övriga, såkallade fria, variablerna. De fria variablerna utgör då parametrar. Alla ekvationssystem ger inte parameterlösningar och har därmed inte fria variabler.  Om raderna ger en omöjlig ekvation är ekvationssystemet inkonsistent.</p>
     <p>Lösningsmängderna till ekvationssystem som ger parametriserade lösnignar kan ge olika geometriska representationer av ekvationssystemet. Exempelvis representeras ett ekvationssystem med en enparametrig lösning av en linje och ett med en tvåparametrig lösning av ett plan.  </p>
     <h3 id="node-44">Ekvationssystem på annan form</h3>
     <p>Ekvationssystem går även att skriva upp på generell form med hjälp av matrismultiplikation enligt  </p>
@@ -603,7 +606,7 @@ table th {
       y_3
     \end{bmatrix}
     </div>
-    <p>Utifrån detta går det att dra slutsatsen att <span data-math="inline">A \vec{x} = \vec{b}</span> är lösbart är ekvivalent med att <span data-math="inline">\vec{b}</span> är en linjärkombination av kolumnvektorerna i <span data-math="inline">A</span>.</p>
+    <p>Utifrån detta går det att dra slutsatsen att <span data-math="inline">A \vec{x} = \vec{b}</span> är lösbart är ekvivalent med att <span data-math="inline">\vec{b}</span> är en linjärkombination av kolumnvektorerna i <span data-math="inline">A</span>. Det är även värt att notera att detta kan användas för att hitta lösningsvektorn <span data-math="inline">\vec{x}</span> för samtliga <span data-math="inline">\vec{y}</span> med hjälp av multiplikation med <span data-math="inline">A^{-1}</span>, </p>
     <h3 id="node-45">Flerdimensionell geometrisk tolkning av ekvationssystem</h3>
     <p>En linjär ekvation i exempelvis ett fyrdimensionellt rum kan betraktas som ett tredimensionellt rum i det fyrdimensionella rummet. </p>
     <ul>
@@ -621,16 +624,23 @@ table th {
             <p> Antalet lösningar bestäms av trappformens utseende</p>
         </li>
     </ul>
-    <p>Homogena system är ett system där alla högerled är 0</p>
-    <ul>
-        <li>
-            <p>-&gt; alla högerled = 0</p>
-        </li>
-        <li>
-            <p>-&gt; alltid konsistenta då <span data-math="inline">\vec{x} = \vec{0}</span> alltid är en lösning</p>
-        </li>
-    </ul>
-    <div class="theorem theorem-theorem" id="node-46">
+    <div class="definition" id="node-46">
+        <p class="definition-heading"><strong>Definition (Homogena system).</strong></p>
+        <p>Låt <span data-math="inline">A \vec{x} = \vec{y}</span>. Om <span data-math="inline">vec{y} = \vec{0}</span> är systemet homogent. </p>
+    </div>
+    <p>Homogena system är ekvationssystem där alla element i högerledet är noll. Det går även att skriva som en totalmatris enligt</p>
+    <div data-math="block">
+    \left[
+    \begin{array}{cccc|c}
+      a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1j} &amp; 0\\
+      a_{21} &amp; a_{22} &amp; \cdots &amp; a_{1j} &amp; 0\\
+      \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; 0\\
+      a_{i1} &amp; a_{i2} &amp; \cdots &amp; a_{ij}&amp; 0\\
+    \end{array}
+    \right]
+
+    </div>
+    <div class="theorem theorem-theorem" id="node-47">
         <p class="theorem-heading"><strong>Theorem (Homogena ekvationssystems lösningar).</strong></p>
         <p>Ett homogent ekvationssystem har antingen </p>
         <ul>
@@ -642,35 +652,35 @@ table th {
             </li>
         </ul>
     </div>
-    <h3 id="node-47">Ekvationssystem med parametrar</h3>
+    <h3 id="node-48">Ekvationssystem med parametrar</h3>
     <ul>
         <li>
             <p> Radoperationer -&gt; trappform, undvik division</p>
         </li>
     </ul>
-    <div class="theorem theorem-theorem" id="node-48">
+    <div class="theorem theorem-theorem" id="node-49">
         <p class="theorem-heading"><strong>Theorem (Dimensionssatsen för homogena system).</strong></p>
         <p>Om reducerade trappformen av en totalmatris till homogent ekvationssystem i <span data-math="inline">n</span> obekanta har <span data-math="inline">r</span> nollskilda rader så har systemet <span data-math="inline">h-r</span> fria variabler och lösningsmängden har n-r parametrar. </p>
     </div>
     <p><span data-math="inline">r</span> är matrisens rangen </p>
-    <h2 id="node-49">Matrisoperationer</h2>
+    <h2 id="node-50">Matrisoperationer</h2>
     <p>Det är smidigt att definera matrisoperationerna för addition och multiplikation. Addition räknas elementvis. </p>
-    <div class="definition" id="node-50">
+    <div class="definition" id="node-51">
         <p class="definition-heading"><strong>Definition (Matrisaddition).</strong></p>
         <p>Låt <span data-math="inline">A, B</span> vara matriser av samma storlek. </p>
         <div data-math="block">
     (A + B)_{ij} = A_{ij} + B_{ij}
     </div>
     </div>
-    <div class="definition" id="node-51">
+    <div class="definition" id="node-52">
         <p class="definition-heading"><strong>Definition (Matrismultiplikation med skalärer).</strong></p>
         <p>Låt <span data-math="inline">A</span> vara en matris och <span data-math="inline">k</span> vara en skalär. </p>
         <div data-math="block">
     (k \cdot A)_{ij} = k \cdot A_{ij}
     </div>
     </div>
-    <p>Det kan vara värt att notera att matrismultiplikationen likt vektorer uppfyller några krav. Exempelvis finns ett neutralelement över addition, den såkallade nollmatrisen som endast består av nollor. Det finns även en enhetsmatris, även kallad identitetsmatris, som är neutralelementet över multiplikation och består av ettor på diagonaler och nollor i övrigt. Enhetsmatrisen betecknas med antingen <span data-math="inline">E</span> eller <span data-math="inline">I</span> och för dessa gäller <span data-math="inline">A \cdot I = A = I \cdot A</span> Med andra ord liknar nollmatrisens och enhetsmatrisens funktion ettans respektive nollans funktion vid skaläroperationer. </p>
-    <div class="theorem theorem-theorem" id="node-52">
+    <p>Det kan vara värt att notera att matrismultiplikationen likt vektorer uppfyller några krav. Exempelvis finns ett neutralelement över addition, den såkallade nollmatrisen som endast består av nollor. Det finns även en <span class="concept">enhetsmatris</span>, även kallad identitetsmatris, som är neutralelementet över multiplikation och består av ettor på diagonaler och nollor i övrigt. Enhetsmatrisen betecknas med antingen <span data-math="inline">E</span> eller <span data-math="inline">I</span> och för dessa gäller <span data-math="inline">A \cdot I = A = I \cdot A</span> Med andra ord liknar nollmatrisens och enhetsmatrisens funktion ettans respektive nollans funktion vid skaläroperationer. </p>
+    <div class="theorem theorem-theorem" id="node-53">
         <p class="theorem-heading"><strong>Theorem (Räkneregler för matriser).</strong></p>
         <ul>
             <li>
@@ -684,7 +694,7 @@ table th {
             </li>
         </ul>
     </div>
-    <div class="definition" id="node-53">
+    <div class="definition" id="node-54">
         <p class="definition-heading"><strong>Definition (Matrismultiplikation med vektorer).</strong></p>
         <p>Låt A vara en <span data-math="inline">m \times n</span> matris (representerat av en vektor med vektorer) och <span data-math="inline">\vec{x} \in \mathbb{R}^n</span> vara en vektor av storlek <span data-math="inline">n \times 1</span>.</p>
         <p>Multiplikationen av vektorn defineras enligt</p>
@@ -693,7 +703,7 @@ table th {
     </div>
     </div>
     <p>Detta gör att <span data-math="inline">A \vec{x}</span> i definitionen ovan är en linjärkombination av kolumnerna i <span data-math="inline">A</span> där <span data-math="inline">\vec{x}</span> utgör koefficienterna. Det går även att se på matrismultiplikation med en vektor som skalärprodukten av raden i matrisen och kolumnen i vektorn. </p>
-    <div class="theorem theorem-theorem" id="node-54">
+    <div class="theorem theorem-theorem" id="node-55">
         <p class="theorem-heading"><strong>Theorem (Räkneregler för matrismultiplikation).</strong></p>
         <p>Låt <span data-math="inline">A, B</span> vara en matris och <span data-math="inline">k</span> en skalär</p>
         <ul>
@@ -708,14 +718,14 @@ table th {
             </li>
         </ul>
     </div>
-    <div class="definition" id="node-55">
+    <div class="definition" id="node-56">
         <p class="definition-heading"><strong>Definition (Matrisprodukt i allmänhet).</strong></p>
         <p>Låt <span data-math="inline">A</span> vara en matris <span data-math="inline">m \times s</span> och <span data-math="inline">B</span> vara en <span data-math="inline">s \times n</span> matris där <span data-math="inline">\vec{b}_i \in \mathbb{R}^s</span>.</p>
         <div data-math="block">
     AB = \begin{bmatrix}A \vec{b_1} A \vec{b_2} \cdots A \vec{b_n} \end{bmatrix}
     </div>
     </div>
-    <h3 id="node-56">Olikheter mellan matrisoperationer och taloperationer</h3>
+    <h3 id="node-57">Olikheter mellan matrisoperationer och taloperationer</h3>
     <p>Matrisoperationer beter sig inte på samma sätt som taloperationer. Några exempel på detta är:</p>
     <ul>
         <li>
@@ -725,20 +735,18 @@ table th {
             <p> Nolldelare, alltså finns <span data-math="inline">A, B</span> så att <span data-math="inline">AB = 0</span> även om <span data-math="inline">A \neq 0, B \neq = 0</span></p>
         </li>
         <li>
-            <p> Strykningslagen gäller inte, dvs <span data-math="inline">AB = AC</span> medför inte <span data-math="inline">B = C</span></p>
+            <p> Strykningslagen gäller inte, dvs <span data-math="inline">AB = AC</span> medför inte <span data-math="inline">B = C</span>. Detta går att göra med matriser, men det kräver att matrisinversen existerar.</p>
         </li>
     </ul>
-    <h2 id="node-57">Transponering av matriser</h2>
+    <h2 id="node-58">Transponering av matriser</h2>
     <p>Ett <span class="concept">transponat</span> till en matris betecknas med <span data-math="inline">A^T</span> och är en matris där raderna har byts mot kolumner. Alltså blir en <span data-math="inline">n \times m</span> matris en <span data-math="inline">m \times n</span> matris. Utifrån detta går det även att definera symmetriska matriser.</p>
-    <div class="definition" id="node-58">
+    <div class="definition" id="node-59">
         <p class="definition-heading"><strong>Definition (Transponat av matriser).</strong></p>
         <p>Låt <span data-math="inline">A</span> vara en <span data-math="inline">n \times n</span> matris.</p>
         <p><span data-math="inline">A = A^T \implies A</span> är symmetrisk </p>
     </div>
-    <p><span data-math="inline">A^T</span> byt plats på rader och kolumner</p>
-    <p>Symmetrisk matris: <span data-math="inline">A^T = A</span>, alltid kvadratisk</p>
-    <h2 id="node-59">Invers matris</h2>
-    <div class="definition" id="node-60">
+    <h2 id="node-60">Invers matris</h2>
+    <div class="definition" id="node-61">
         <p class="definition-heading"><strong>Definition (Inversa matriser).</strong></p>
         <p>En <span data-math="inline">m \times m</span> matris <span data-math="inline">A</span> är inverterbar om det finns en <span data-math="inline">m \times m</span> matris <span data-math="inline">A^{-1}</span> så att </p>
         <div data-math="block">
@@ -746,16 +754,16 @@ table th {
     </div>
         <p>Om <span data-math="inline">A^{-1}</span> inte existerar är <span data-math="inline">A</span> <span class="concept">singulär</span>.</p>
     </div>
-    <div class="theorem theorem-theorem" id="node-61">
+    <div class="theorem theorem-theorem" id="node-62">
         <p class="theorem-heading"><strong>Theorem (Inversen är entydig).</strong></p>
         <p><span data-math="inline">A_1, A_2</span> är inverser till <span data-math="inline">A \implies A_1 = A_2</span></p>
     </div>
-    <div class="theorem theorem-theorem" id="node-62">
+    <div class="theorem theorem-theorem" id="node-63">
         <p class="theorem-heading"><strong>Theorem (Inversen till en invers).</strong></p>
         <p><span data-math="inline">B = A^{-1} \implies A = B^{-1}</span> </p>
     </div>
     <p>Invesen kan användas till att lösa ekvationer med matriser, för </p>
-    <div class="theorem theorem-theorem" id="node-63">
+    <div class="theorem theorem-theorem" id="node-64">
         <p class="theorem-heading"><strong>Theorem (Invers till en 2x2 matris).</strong></p>
         <p>Låt</p>
         <div data-math="block">
@@ -776,7 +784,7 @@ table th {
     </div>
     </div>
     <p>Fördelen med satsen ovan jämfört med gausseliminering är att det går att beskriva lösningen <span data-math="inline">\vec{y}</span> till en matris <span data-math="inline">A</span> med en matrismultiplikation med <span data-math="inline">\vec{y}</span>. Detta kan exempelvis användas för att hitta motsatta avbildningen, någonting som beskrivs senare i kursen. </p>
-    <div class="theorem theorem-theorem" id="node-64">
+    <div class="theorem theorem-theorem" id="node-65">
         <p class="theorem-heading"><strong>Theorem (Inversers räkneregler).</strong></p>
         <ol>
             <li>
@@ -789,17 +797,17 @@ table th {
                 <p> <span data-math="inline">(A^T)^{-1} = (A^{-1})^T</span></p>
             </li>
             <li>
-                <p> <span data-math="inline">kA^T = \frac{1}{k} A^{-1}</span></p>
+                <p> <span data-math="inline">kA^T = \frac{1}{k} A^{-1}</span> </p>
             </li>
         </ol>
     </div>
-    <h2 id="node-65">Elementära matriser</h2>
+    <h2 id="node-66">Elementära matriser</h2>
     <p>En elementär matriser är matriser som utför en radoperation vid multiplikation från vänster.</p>
-    <div class="definition" id="node-66">
+    <div class="definition" id="node-67">
         <p class="definition-heading"><strong>Definition (Elementär matris).</strong></p>
         <p>En elementär matris ges av motsvarande elementär radoperation på I. </p>
     </div>
-    <div class="example" id="node-67">
+    <div class="example" id="node-68">
         <p class="example-heading"><strong>Example.</strong></p>
         <p>Bestäm elementär matrisen för <span data-math="inline">R_3 \rightarrow R_3 - 3R_1</span></p>
         <div data-math="block">
@@ -816,38 +824,23 @@ table th {
     </div>
         <p>är elementär matrisen.</p>
     </div>
-    <div class="theorem theorem-theorem" id="node-68">
+    <div class="theorem theorem-theorem" id="node-69">
         <p class="theorem-heading"><strong>Theorem.</strong></p>
         <p>Om <span data-math="inline">E</span> kommer från en radoperation på <span data-math="inline">I</span> så är <span data-math="inline">EA</span> resultatet av samma radoperation på <span data-math="inline">A</span>.  </p>
     </div>
-    <div class="theorem theorem-theorem" id="node-69">
+    <div class="theorem theorem-theorem" id="node-70">
         <p class="theorem-heading"><strong>Theorem (Radoperationer är inverterbara).</strong></p>
         <p>Varje elementär matris <span data-math="inline">A</span> är inverterbar och <span data-math="inline">A^{-1}</span> är också elementär då den utför den omvända radoperationen.</p>
     </div>
-    <h2 id="node-70">Inversalgoritmen</h2>
-    <div class="theorem theorem-theorem" id="node-71">
-        <p class="theorem-heading"><strong>Theorem.</strong></p>
-        <p>För en <span data-math="inline">m \times m</span> matris <span data-math="inline">A</span> är följande ekvivalent. </p>
-        <ol>
-            <li>
-                <p> Reducerad trappstegsform av <span data-math="inline">A</span> är <span data-math="inline">I</span>.</p>
-            </li>
-            <li>
-                <p> A är en produkt av elementära matriser</p>
-            </li>
-            <li>
-                <p> A är inverterbar</p>
-            </li>
-        </ol>
-    </div>
-    <p>Tanken med ovanstående sats är att matriser som kan skrivas som en ordnad mängd radoperationer på är inverterbara då varje radoperation har en invers. Detta gör även att varje inverterbar matris är en produkt av elementära matriser. Detta gör att det går att faststämma en algoritm för att hitta en invers matris. Med insikten att samma radoperationer gör om A till I tar I till <span data-math="inline">A^-1</span> .</p>
+    <h2 id="node-71">Inversalgoritmen</h2>
+    <p>Tanken med ovanstående sats är att matriser som kan skrivas som en ordnad mängd radoperationer på är inverterbara då varje radoperation har en invers. Detta gör även att varje inverterbar matris är en produkt av elementära matriser. Detta gör att det går att faststämma en algoritm för att hitta en invers matris. Med insikten att samma radoperationer gör om A till I tar I till <span data-math="inline">A^{-1}</span> .</p>
     <div class="theorem theorem-theorem" id="node-72">
         <p class="theorem-heading"><strong>Theorem (Inversalgoritmen).</strong></p>
         <p>Låt <span data-math="inline">M = \left[A|I\right]</span> vara en totalmatris. Om det går att göra radoperationer så att</p>
         <div data-math="block">
     \left[A|I\right] ~\left[I|A^{-1}\right]
     </div>
-        <p>är <span data-math="inline">A</span> inverterbar och ges av dessa radoperationer.  Om det inte går existerar inte <span data-math="inline">A^{-1}</span>.</p>
+        <p>är <span data-math="inline">A</span> inverterbar och ges av dessa radoperationer. Om det inte går existerar inte <span data-math="inline">A^{-1}</span>.</p>
     </div>
     <p>En följd av inversalgoritmen är att en nollrad i matrisen <span data-math="inline">A</span> gör att denna inte är inverterbar. </p>
     <div class="example" id="node-73">
@@ -879,11 +872,11 @@ table th {
     </div>
         <p><span data-math="inline">A</span> är alltså inverterbar och har inversen</p>
     </div>
-    <p>Metoden där determinanter användes för att hitta inversen fungerar även på matriser större än <span data-math="inline">2 \times 2</span>. Detta är användbart då formeln oftast är snabbare för mindre matriser. </p>
+    <p>Metoden där determinanter användes för att hitta inversen fungerar även på matriser större än <span data-math="inline">2 \times 2</span>. Detta är användbart då formeln oftast är snabbare för mindre matriser än gausseliminering. </p>
     <div class="theorem theorem-theorem" id="node-74">
         <p class="theorem-heading"><strong>Theorem.</strong></p>
         <div data-math="block">
-    A^{-1} = \frac{1}{\operatorname{det} A} A^T
+    A^{-1} = \frac{1}{\operatorname{det} A} C^T
     </div>
     </div>
     <div class="theorem theorem-theorem" id="node-75">
@@ -909,8 +902,17 @@ table th {
     </div>
     <div class="theorem theorem-theorem" id="node-77">
         <p class="theorem-heading"><strong>Theorem (Satsen om allting).</strong></p>
-        <p>För en <span data-math="inline">n \times n</span> matris <span data-math="inline">A</span> är följande också ekvivalent: </p>
+        <p>För en <span data-math="inline">m \times m</span> matris <span data-math="inline">A</span> är följande ekvivalent. </p>
         <ol>
+            <li>
+                <p> Reducerad trappstegsform av <span data-math="inline">A</span> är <span data-math="inline">I</span>.</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">A</span> är en produkt av elementära matriser</p>
+            </li>
+            <li>
+                <p> <span data-math="inline">A</span> är inverterbar</p>
+            </li>
             <li>
                 <p> <span data-math="inline">A \vec{x} = 0</span> har endast den triviala lösningen <span data-math="inline">\vec{x} = 0</span> </p>
             </li>
@@ -919,6 +921,12 @@ table th {
             </li>
             <li>
                 <p> <span data-math="inline">A \vec{x} = \vec{b}</span> har exakt en lösning för varje <span data-math="inline">\vec{b}</span></p>
+            </li>
+            <li>
+                <p> Kolonnerna i <span data-math="inline">A</span> är linjärt oberoende</p>
+            </li>
+            <li>
+                <p> Raderna i <span data-math="inline">A</span> är linjärt oberoende</p>
             </li>
         </ol>
     </div>

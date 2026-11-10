@@ -9,7 +9,7 @@
 
 <!-- KaTeX JS & Auto-render extension -->
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body);"></script>
 </head>
 <script>
@@ -19,7 +19,9 @@
             displayMode: true,
             throwOnError: false,
             macros: {
-                "\\arraystretch": "3" // Adjust this multiplier as needed
+                "\\arraystretch": "1" // Adjust this multiplier as needed.
+                // NOTE: There is a problem with setting this and rendering matricies
+                // NOTE: Changed the parameter from 3 -> 1 to resolve matrix rendering spacing issues
             }
         };
 
@@ -233,6 +235,7 @@ table th {
   padding: 8px;
   border-radius: 4px;
 }
+
 </style></head>
 <body>
     <h1 id="node-0">Introduktion</h1>

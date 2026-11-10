@@ -9,7 +9,7 @@
 
 <!-- KaTeX JS & Auto-render extension -->
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"
         onload="renderMathInElement(document.body);"></script>
 </head>
 <script>
@@ -19,7 +19,9 @@
             displayMode: true,
             throwOnError: false,
             macros: {
-                "\\arraystretch": "3" // Adjust this multiplier as needed
+                "\\arraystretch": "1" // Adjust this multiplier as needed.
+                // NOTE: There is a problem with setting this and rendering matricies
+                // NOTE: Changed the parameter from 3 -> 1 to resolve matrix rendering spacing issues
             }
         };
 
@@ -233,6 +235,7 @@ table th {
   padding: 8px;
   border-radius: 4px;
 }
+
 </style></head>
 <body>
     <h1 id="node-0">Digital Design</h1>
@@ -1012,5 +1015,528 @@ table th {
             <p> Pull down kretsen byggs genom att invertera <span data-math="inline">f</span> i primitiver</p>
         </li>
     </ol>
+    <h2 id="node-62">Graykode</h2>
+    <p><span class="concept">Graycode</span> är ett sätt att skriva tal där det endast skiljer en bit mellan två närliggande tal. Detta kan vara användbart för att datorn vid övergånger mellan två tal inte ska läsa av fel tal. Graycoden ges av att spegla sanningstabellen flera gånger:</p>
+    <img id="node-63" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2260.964752mm%22 %20%20%20height=%2242.586414mm%22 %20%20%20viewBox=%220%200%2060.964752%2042.586414%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%221%22 %20%20%20%20%20%20%20markerHeight=%221%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-77.000001,-53.709807)%22%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:%23000000;fill-opacity:0.189189;stroke:none;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22rect20%22 %20%20%20%20%20%20%20width=%226%22 %20%20%20%20%20%20%20height=%2211%22 %20%20%20%20%20%20%20x=%22131.96475%22 %20%20%20%20%20%20%20y=%2257%22%20/%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:%23000000;fill-opacity:0.189189;stroke:none;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22rect21%22 %20%20%20%20%20%20%20width=%2216.000002%22 %20%20%20%20%20%20%20height=%2219.999998%22 %20%20%20%20%20%20%20x=%22121.96475%22 %20%20%20%20%20%20%20y=%2257%22%20/%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:%23000000;fill-opacity:0.189189;stroke:none;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20id=%22rect19%22 %20%20%20%20%20%20%20width=%226%22 %20%20%20%20%20%20%20height=%2211%22 %20%20%20%20%20%20%20x=%2287%22 %20%20%20%20%20%20%20y=%2256.999996%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52778px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2280.001724%22 %20%20%20%20%20%20%20y=%2256.264347%22 %20%20%20%20%20%20%20id=%22text1%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan1%22 %20%20%20%20%20%20%20%20%20style=%22font-size:3.52778px;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2280.001724%22 %20%20%20%20%20%20%20%20%20y=%2256.264347%22%3EA%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52778px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2290.001724%22 %20%20%20%20%20%20%20y=%2256.264347%22 %20%20%20%20%20%20%20id=%22text2%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan2%22 %20%20%20%20%20%20%20%20%20style=%22font-size:3.52778px;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2290.001724%22 %20%20%20%20%20%20%20%20%20y=%2256.264347%22%3EB%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2290.000862%22 %20%20%20%20%20%20%20y=%2261.261761%22 %20%20%20%20%20%20%20id=%22text4%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan4%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2290.000862%22 %20%20%20%20%20%20%20%20%20y=%2261.261761%22%3E0%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2290.000862%22 %20%20%20%20%20%20%20y=%2266.261765%22 %20%20%20%20%20%20%20id=%22text5%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan5%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2290.000862%22 %20%20%20%20%20%20%20%20%20y=%2266.261765%22%3E1%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use5%22 %20%20%20%20%20%20%20transform=%22translate(0,4.9974131)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use6%22 %20%20%20%20%20%20%20transform=%22translate(1.2212344e-6,15.000001)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:0.8,%200.8;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2087.000002,67.999998%20h%206%22 %20%20%20%20%20%20%20id=%22path6%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use7%22 %20%20%20%20%20%20%20transform=%22translate(-9.9999988)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use8%22 %20%20%20%20%20%20%20transform=%22translate(-9.9999988,5.0000009)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use9%22 %20%20%20%20%20%20%20transform=%22translate(-9.7709004,4.9974131)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use10%22 %20%20%20%20%20%20%20transform=%22translate(-9.7709004,9.997413)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%2077.000001,56.999996%20h%2016%22 %20%20%20%20%20%20%20id=%22path10%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52778px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22114.8881%22 %20%20%20%20%20%20%20y=%2256.264347%22 %20%20%20%20%20%20%20id=%22text10%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan10%22 %20%20%20%20%20%20%20%20%20style=%22font-size:3.52778px;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22114.8881%22 %20%20%20%20%20%20%20%20%20y=%2256.264347%22%3EA%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52778px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22124.8881%22 %20%20%20%20%20%20%20y=%2256.264347%22 %20%20%20%20%20%20%20id=%22text11%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan11%22 %20%20%20%20%20%20%20%20%20style=%22font-size:3.52778px;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22124.8881%22 %20%20%20%20%20%20%20%20%20y=%2256.264347%22%3EB%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20y=%2261.261761%22 %20%20%20%20%20%20%20id=%22text12%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan12%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20%20%20y=%2261.261761%22%3E0%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20y=%2266.261765%22 %20%20%20%20%20%20%20id=%22text13%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan13%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20%20%20y=%2266.261765%22%3E1%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use13%22 %20%20%20%20%20%20%20transform=%22translate(44.964754,4.9974131)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use14%22 %20%20%20%20%20%20%20transform=%22translate(44.964755,15.000001)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:0.8,%200.8;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%20131.96475,67.999998%20h%206%22 %20%20%20%20%20%20%20id=%22path14%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use15%22 %20%20%20%20%20%20%20transform=%22translate(34.964755)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use16%22 %20%20%20%20%20%20%20transform=%22translate(34.964755,5.0000009)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use17%22 %20%20%20%20%20%20%20transform=%22translate(35.193853,4.9974131)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use18%22 %20%20%20%20%20%20%20transform=%22translate(35.193853,9.997413)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%20110.88638,56.999996%20h%2027.07837%22 %20%20%20%20%20%20%20id=%22path18%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:0.8,%200.8;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%20121.96475,76.899998%20h%2016%22 %20%20%20%20%20%20%20id=%22path19%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52778px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22135.01649%22 %20%20%20%20%20%20%20y=%2256.264347%22 %20%20%20%20%20%20%20id=%22text21%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan21%22 %20%20%20%20%20%20%20%20%20style=%22font-size:3.52778px;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22135.01649%22 %20%20%20%20%20%20%20%20%20y=%2256.264347%22%3EC%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use22%22 %20%20%20%20%20%20%20transform=%22translate(24.964752)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use23%22 %20%20%20%20%20%20%20transform=%22translate(24.964752,5.0000009)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use24%22 %20%20%20%20%20%20%20transform=%22translate(24.964752,10.000001)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use25%22 %20%20%20%20%20%20%20transform=%22translate(24.964752,15.000002)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use26%22 %20%20%20%20%20%20%20transform=%22translate(25.19385,14.997413)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use27%22 %20%20%20%20%20%20%20transform=%22translate(25.19385,19.997413)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use28%22 %20%20%20%20%20%20%20transform=%22translate(25.19385,24.997413)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use29%22 %20%20%20%20%20%20%20transform=%22translate(25.19385,29.997413)%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20y=%2296.261772%22 %20%20%20%20%20%20%20id=%22text30%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan30%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20%20%20y=%2296.261772%22%3E0%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:3.52777px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20y=%2291.256599%22 %20%20%20%20%20%20%20id=%22text31%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan31%22 %20%20%20%20%20%20%20%20%20style=%22stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22134.96561%22 %20%20%20%20%20%20%20%20%20y=%2291.256599%22%3E1%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use31%22 %20%20%20%20%20%20%20transform=%22translate(44.964754,19.997413)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use32%22 %20%20%20%20%20%20%20transform=%22translate(44.964755,20.000008)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use33%22 %20%20%20%20%20%20%20transform=%22translate(34.964755,35.000008)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use34%22 %20%20%20%20%20%20%20transform=%22translate(34.964755,30.000008)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use35%22 %20%20%20%20%20%20%20transform=%22translate(35.193853,19.997413)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use36%22 %20%20%20%20%20%20%20transform=%22translate(35.193853,14.997423)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:0.8,%200.8;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20d=%22m%20121.96475,76.999998%20h%2016%22 %20%20%20%20%20%20%20id=%22path36%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.82222px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';writing-mode:lr-tb;direction:ltr;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1%22 %20%20%20%20%20%20%20x=%2290.416191%22 %20%20%20%20%20%20%20y=%2286.733116%22 %20%20%20%20%20%20%20id=%22text36%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan36%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.82222px;fill:%23000000;fill-opacity:1;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%2290.416191%22 %20%20%20%20%20%20%20%20%20y=%2286.733116%22%3ESpegling%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;fill-opacity:1;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20102.33273,84.969042%20c%207.75009,-6.118047%204.34198,-24.648932%20-7.292147,-18.137091%22 %20%20%20%20%20%20%20id=%22path37%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;fill-opacity:1;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20102.33273,84.969042%20c%204.764,-4.527722%2011.38278,-9.171963%2018.31894,-8.291621%22 %20%20%20%20%20%20%20id=%22path38%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;fill-opacity:1;stroke:%23000000;stroke-width:0.2;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22M%20102.33273,84.969042%20C%20112,77.000003%20102.73955,63.091113%20129.55481,67.723867%22 %20%20%20%20%20%20%20id=%22path39%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    <h2 id="node-64">K-maps</h2>
+    <h3 id="node-65">Rita upp en k-map</h3>
+    <p>I bland vid förenkling av SOP och POS kan det vara svårt att avgöra om uttrycket är på enklast möjliga form. För att göra detta går det att använda K-maps, ett visuelt sätt att förenkla uttrycken. En K-map med tre inparametrar ritas upp med enligt tabellen nedan med hjälp av graycode. </p>
+    <table>
+        <tr>
+            <th>
+                <p>A \ BC</p>
+            </th>
+            <th>
+                <p>00</p>
+            </th>
+            <th>
+                <p>01</p>
+            </th>
+            <th>
+                <p>11</p>
+            </th>
+            <th>
+                <p>10</p>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+    </table>
+    <p>I varje ruta fylls motsvarande sanningsvärde in, vilket i tabellen ovan ges av nedanstående sanningstabell. K-maps med fyra inparametrar görs även graycode i både rader och kolumner. </p>
+    <table>
+        <tr>
+            <th>
+                <p>A</p>
+            </th>
+            <th>
+                <p>B</p>
+            </th>
+            <th>
+                <p>C</p>
+            </th>
+            <th>
+                <p>Y</p>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>1</p>
+            </td>
+            <td>
+                <p>0</p>
+            </td>
+        </tr>
+    </table>
+    <p>För att sedan använda tabellen till förenklingar ringas grupper av ettor alternativ nollor in enligt nedanstående regler.</p>
+    <ol>
+        <li>
+            <p> Alla ettor alternativt nollor måste ringas in minst en gång</p>
+        </li>
+        <li>
+            <p> Varje ring måste innehålla <span data-math="inline">2^N</span> ettor alternativt nollor i varje riktning</p>
+        </li>
+        <li>
+            <p> Varje ring bör vara så stor som möjligt, undvik ringar med endast ett element om dessa inte underlättar förenklingen</p>
+        </li>
+        <li>
+            <p> Ringarna bör vara rektanglar</p>
+        </li>
+        <li>
+            <p> Ringar får gå över kanterna</p>
+        </li>
+    </ol>
+    <h3 id="node-66">Läsa av det algebraiska resultatet</h3>
+    <p>Det förenklade algebraiska uttrycket läses av genom att endast ta de termerna som behåller sitt värde och sedan, beroende på om ringarna består av ettor eller nollor göra min- respektive maxtermer.</p>
+    <img id="node-67" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2224.084652mm%22 %20%20%20height=%2218.556023mm%22 %20%20%20viewBox=%220%200%2024.084652%2018.556023%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20inkscape:version=%221.4.4%20(dcaf3e7,%202026-05-05)%22 %20%20%20sodipodi:docname=%22i_kmap1.svg%22 %20%20%20xmlns:inkscape=%22http://www.inkscape.org/namespaces/inkscape%22 %20%20%20xmlns:sodipodi=%22http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Csodipodi:namedview %20%20%20%20%20id=%22namedview1%22 %20%20%20%20%20pagecolor=%22%23ffffff%22 %20%20%20%20%20bordercolor=%22%23000000%22 %20%20%20%20%20borderopacity=%220.25%22 %20%20%20%20%20inkscape:showpageshadow=%222%22 %20%20%20%20%20inkscape:pageopacity=%220.0%22 %20%20%20%20%20inkscape:pagecheckerboard=%220%22 %20%20%20%20%20inkscape:deskcolor=%22%23d1d1d1%22 %20%20%20%20%20inkscape:document-units=%22mm%22 %20%20%20%20%20showgrid=%22true%22 %20%20%20%20%20inkscape:zoom=%223.7670563%22 %20%20%20%20%20inkscape:cx=%2225.21863%22 %20%20%20%20%20inkscape:cy=%2225.35136%22 %20%20%20%20%20inkscape:window-width=%221440%22 %20%20%20%20%20inkscape:window-height=%22788%22 %20%20%20%20%20inkscape:window-x=%220%22 %20%20%20%20%20inkscape:window-y=%2231%22 %20%20%20%20%20inkscape:window-maximized=%220%22 %20%20%20%20%20inkscape:current-layer=%22g18%22 %20%20%20%20%20showguides=%22true%22%3E %20%20%20%20%3Cinkscape:grid %20%20%20%20%20%20%20id=%22grid1%22 %20%20%20%20%20%20%20units=%22mm%22 %20%20%20%20%20%20%20originx=%22-93.471969%22 %20%20%20%20%20%20%20originy=%22-43.464645%22 %20%20%20%20%20%20%20spacingx=%220.99999998%22 %20%20%20%20%20%20%20spacingy=%221%22 %20%20%20%20%20%20%20empcolor=%22%230099e5%22 %20%20%20%20%20%20%20empopacity=%220.30196078%22 %20%20%20%20%20%20%20color=%22%230099e5%22 %20%20%20%20%20%20%20opacity=%220.14901961%22 %20%20%20%20%20%20%20empspacing=%225%22 %20%20%20%20%20%20%20enabled=%22true%22 %20%20%20%20%20%20%20visible=%22true%22%20/%3E %20%20%3C/sodipodi:namedview%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20inkscape:stockid=%22Triangle%20arrow%22 %20%20%20%20%20%20%20markerWidth=%221%22 %20%20%20%20%20%20%20markerHeight=%221%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20inkscape:isstock=%22true%22 %20%20%20%20%20%20%20inkscape:collect=%22always%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20inkscape:label=%22Layer%201%22 %20%20%20%20%20inkscape:groupmode=%22layer%22 %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-93.471967,-43.464644)%22%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.41111px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2296.470108%22 %20%20%20%20%20%20%20y=%2245.029163%22 %20%20%20%20%20%20%20id=%22text1%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan1%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.41111px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%2296.470108%22 %20%20%20%20%20%20%20%20%20y=%2245.029163%22%3EBC%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.13798%22 %20%20%20%20%20%20%20y=%2250.755508%22 %20%20%20%20%20%20%20id=%22text2%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan2%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.13798%22 %20%20%20%20%20%20%20%20%20y=%2250.755508%22%3E1%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22m%2093.507322,43.499999%204,4%20H%20117.50732%2097.507322%20v%2010%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.41111px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2294.470108%22 %20%20%20%20%20%20%20y=%2247.029163%22 %20%20%20%20%20%20%20id=%22text3%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan3%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.41111px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%2294.470108%22 %20%20%20%20%20%20%20%20%20y=%2247.029163%22%3EA%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.18397%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text4%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan4%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.18397%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E00%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22105%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text5%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan5%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22105%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E01%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22110%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text6%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan6%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22110%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E11%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22115%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text7%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan7%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22115%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E10%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use8%22 %20%20%20%20%20%20%20transform=%22translate(9.9999951)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use9%22 %20%20%20%20%20%20%20transform=%22translate(14.999995)%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.00052%22 %20%20%20%20%20%20%20y=%2255.757061%22 %20%20%20%20%20%20%20id=%22text9%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan9%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.00052%22 %20%20%20%20%20%20%20%20%20y=%2255.757061%22%3E0%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use10%22 %20%20%20%20%20%20%20transform=%22translate(4.9999946,-5.0000023)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use11%22 %20%20%20%20%20%20%20transform=%22translate(4.9999946)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use12%22 %20%20%20%20%20%20%20transform=%22translate(10)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use13%22 %20%20%20%20%20%20%20transform=%22translate(15.000001)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use14%22 %20%20%20%20%20%20%20transform=%22translate(-4.9999998,-5.0000015)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use15%22 %20%20%20%20%20%20%20transform=%22translate(-4.9999991,5.0000006)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20id=%22rect15%22 %20%20%20%20%20%20%20style=%22fill:none;stroke:%230000ff;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20d=%22m%20117.05,47.999997%20h%20-3.95001%20v%204.000001%20H%20117.05%22 %20%20%20%20%20%20%20sodipodi:nodetypes=%22cccc%22%20/%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff0000;stroke-width:0.0936591;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20id=%22rect16%22 %20%20%20%20%20%20%20width=%229.00634%22 %20%20%20%20%20%20%20height=%223.506341%22 %20%20%20%20%20%20%20x=%22107.99683%22 %20%20%20%20%20%20%20y=%2248.246826%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23ff0000;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20x=%22109.00207%22 %20%20%20%20%20%20%20y=%2261.747242%22 %20%20%20%20%20%20%20id=%22text16%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan16%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23ff0000;fill-opacity:1;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22109.00207%22 %20%20%20%20%20%20%20%20%20y=%2261.747242%22%3EA%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;fill-opacity:0.72549;stroke:%230000ff;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20102,53.611267%20c%200,1.388731%200.20002,4.388731%201,5.38873%22 %20%20%20%20%20%20%20id=%22path17%22 %20%20%20%20%20%20%20sodipodi:nodetypes=%22cc%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g18%22 %20%20%20%20%20%20%20transform=%22translate(4.0020648,-0.25275409)%22%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%230000ff;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20x=%2299.00103%22 %20%20%20%20%20%20%20%20%20y=%2261.999996%22 %20%20%20%20%20%20%20%20%20id=%22text17%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20%20%20id=%22tspan17%22 %20%20%20%20%20%20%20%20%20%20%20style=%22fill:%230000ff;fill-opacity:1;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20%20%20x=%2299.00103%22 %20%20%20%20%20%20%20%20%20%20%20y=%2261.999996%22%3EA%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:%230000ff;fill-opacity:1;stroke:%230000ff;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20d=%22m%2098.26512,59.999998%20h%201.469753%22 %20%20%20%20%20%20%20%20%20id=%22path18%22 %20%20%20%20%20%20%20%20%20sodipodi:nodetypes=%22cc%22%20/%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%230000ff;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20x=%22100.954%22 %20%20%20%20%20%20%20%20%20y=%2261.999996%22 %20%20%20%20%20%20%20%20%20id=%22text19%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20%20%20id=%22tspan19%22 %20%20%20%20%20%20%20%20%20%20%20style=%22fill:%230000ff;fill-opacity:1;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20%20%20x=%22100.954%22 %20%20%20%20%20%20%20%20%20%20%20y=%2261.999996%22%3EC%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;fill-opacity:1;stroke:%23ff0000;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20%20%20d=%22m%20104.26512,59.999998%20h%201.46975%22 %20%20%20%20%20%20%20%20%20id=%22path20%22 %20%20%20%20%20%20%20%20%20sodipodi:nodetypes=%22cc%22%20/%3E %20%20%20%20%20%20%3Cuse %20%20%20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20%20%20xlink:href=%22%23path18%22 %20%20%20%20%20%20%20%20%20id=%22use21%22 %20%20%20%20%20%20%20%20%20transform=%22translate(1.9979353)%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.71167px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;fill-opacity:1;stroke:none;stroke-width:0.0808661;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1%22 %20%20%20%20%20%20%20x=%22107.00167%22 %20%20%20%20%20%20%20y=%2261.604263%22 %20%20%20%20%20%20%20id=%22text18%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan18%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.0808661%22 %20%20%20%20%20%20%20%20%20x=%22107.00167%22 %20%20%20%20%20%20%20%20%20y=%2261.604263%22%3E+%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23rect15%22 %20%20%20%20%20%20%20id=%22use18%22 %20%20%20%20%20%20%20transform=%22rotate(180,107.525,49.999999)%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23ff0000;fill-opacity:1;stroke:none;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20x=%22111.00207%22 %20%20%20%20%20%20%20y=%2261.747242%22 %20%20%20%20%20%20%20id=%22text20%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20sodipodi:role=%22line%22 %20%20%20%20%20%20%20%20%20id=%22tspan20%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23ff0000;fill-opacity:1;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%22111.00207%22 %20%20%20%20%20%20%20%20%20y=%2261.747242%22%3EB%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;fill-opacity:0.72549;stroke:%23ff0000;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20112,52.477411%20c%200,1.388731%20-0.67178,4.955659%20-1.67178,6.522586%22 %20%20%20%20%20%20%20id=%22path21%22 %20%20%20%20%20%20%20sodipodi:nodetypes=%22cc%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    <h3 id="node-68">K-Maps med "Don't care"</h3>
+    <p>Vissa fall kräver specifikationen inte att vissa kombinationer ska ge någonting då dessa aldrig förekommer. Dessa kan betecknas på många olika sätt och i denna sammanfattning betecknas dessa med x. I en K-map med "don't care" värden kan dessa bestämmas så att uttrycket blir så enkelt som möjligt. Notera dock att det är god praxis att dokumentera den nya sanningstabellen. </p>
+    <div class="example" id="node-69">
+        <p class="example-heading"><strong>Example (Fyrabitars 7-segmentsskärm).</strong></p>
+        <p>Designa en decodare för G-segmentet i en 7-segments skärm med NAND, NOT och NOR grindar. Värden större än 10 är "don't cares".</p>
+        <table>
+            <tr>
+                <th>
+                    <p>A</p>
+                </th>
+                <th>
+                    <p>B</p>
+                </th>
+                <th>
+                    <p>C</p>
+                </th>
+                <th>
+                    <p>D</p>
+                </th>
+                <th>
+                    <p>Y</p>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>0</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>1</p>
+                </td>
+                <td>
+                    <p>X</p>
+                </td>
+            </tr>
+        </table>
+        <p>Sanningstabellen ger följade K-map:</p>
+        <img id="node-70" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2224.084652mm%22 %20%20%20height=%2224.535355mm%22 %20%20%20viewBox=%220%200%2024.084652%2024.535355%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%20/%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-93.471967,-43.464644)%22%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.41111px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2296.470108%22 %20%20%20%20%20%20%20y=%2245.029163%22 %20%20%20%20%20%20%20id=%22text1%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan1%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.41111px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%2296.470108%22 %20%20%20%20%20%20%20%20%20y=%2245.029163%22%3ECD%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.13797%22 %20%20%20%20%20%20%20y=%2250.755508%22 %20%20%20%20%20%20%20id=%22text2%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan2%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.13797%22 %20%20%20%20%20%20%20%20%20y=%2250.755508%22%3E1%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.1;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22m%2093.507322,43.499999%204,4%20H%20117.50732%2097.507322%20v%2020.499999%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:1.41111px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2294.470108%22 %20%20%20%20%20%20%20y=%2247.029163%22 %20%20%20%20%20%20%20id=%22text3%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan3%22 %20%20%20%20%20%20%20%20%20style=%22font-size:1.41111px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%2294.470108%22 %20%20%20%20%20%20%20%20%20y=%2247.029163%22%3EAB%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.18397%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text4%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan4%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.18397%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E00%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22105%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text5%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan5%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22105%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E01%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22110%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text6%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan6%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22110%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E11%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22115%22 %20%20%20%20%20%20%20y=%2247.007347%22 %20%20%20%20%20%20%20id=%22text7%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan7%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22115%22 %20%20%20%20%20%20%20%20%20y=%2247.007347%22%3E10%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22115.00051%22 %20%20%20%20%20%20%20y=%2250.757057%22 %20%20%20%20%20%20%20id=%22text9%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan9%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22115.00051%22 %20%20%20%20%20%20%20%20%20y=%2250.757057%22%3E0%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text4%22 %20%20%20%20%20%20%20id=%22use1%22 %20%20%20%20%20%20%20transform=%22translate(-5.1834535,3.749712)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text5%22 %20%20%20%20%20%20%20id=%22use2%22 %20%20%20%20%20%20%20transform=%22translate(-9.8196516,8.7497116)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text6%22 %20%20%20%20%20%20%20id=%22use3%22 %20%20%20%20%20%20%20transform=%22translate(-14.862026,13.748161)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text7%22 %20%20%20%20%20%20%20id=%22use4%22 %20%20%20%20%20%20%20transform=%22translate(-20.041861,18.749711)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use5%22 %20%20%20%20%20%20%20transform=%22translate(5.0000033)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use6%22 %20%20%20%20%20%20%20transform=%22translate(-4.9999976)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use7%22 %20%20%20%20%20%20%20transform=%22translate(5.0000033,5)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use8%22 %20%20%20%20%20%20%20transform=%22translate(3.4666596e-6,5)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use9%22 %20%20%20%20%20%20%20transform=%22translate(15.000003,5)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text9%22 %20%20%20%20%20%20%20id=%22use10%22 %20%20%20%20%20%20%20transform=%22translate(-4.9999976,5.0000015)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use11%22 %20%20%20%20%20%20%20transform=%22translate(3.4666596e-6,14.999999)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text2%22 %20%20%20%20%20%20%20id=%22use12%22 %20%20%20%20%20%20%20transform=%22translate(5.0000033,14.999999)%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.2;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%22100.13797%22 %20%20%20%20%20%20%20y=%2260.755508%22 %20%20%20%20%20%20%20id=%22text12%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan12%22 %20%20%20%20%20%20%20%20%20style=%22font-size:2.11667px;fill:%23000000;stroke:none;stroke-width:0.2%22 %20%20%20%20%20%20%20%20%20x=%22100.13797%22 %20%20%20%20%20%20%20%20%20y=%2260.755508%22%3EX%3C/tspan%3E%3C/text%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text12%22 %20%20%20%20%20%20%20id=%22use13%22 %20%20%20%20%20%20%20transform=%22translate(4.8625438)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text12%22 %20%20%20%20%20%20%20id=%22use14%22 %20%20%20%20%20%20%20transform=%22translate(9.8625436)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text12%22 %20%20%20%20%20%20%20id=%22use15%22 %20%20%20%20%20%20%20transform=%22translate(9.8625436,4.9999993)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text12%22 %20%20%20%20%20%20%20id=%22use16%22 %20%20%20%20%20%20%20transform=%22translate(14.862543,4.9999993)%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23text12%22 %20%20%20%20%20%20%20id=%22use17%22 %20%20%20%20%20%20%20transform=%22translate(14.862543)%22%20/%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:none;stroke:%23ff0000;stroke-width:0.10271;stroke-linejoin:round%22 %20%20%20%20%20%20%20id=%22rect17%22 %20%20%20%20%20%20%20width=%228.9972916%22 %20%20%20%20%20%20%20height=%2219.000002%22 %20%20%20%20%20%20%20x=%2298.001358%22 %20%20%20%20%20%20%20y=%2248%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20id=%22rect19%22 %20%20%20%20%20%20%20style=%22fill:none;stroke:%230000ff;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20d=%22m%20117,61.999998%20h%20-4%20V%2053%20h%204%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23rect19%22 %20%20%20%20%20%20%20id=%22use19%22 %20%20%20%20%20%20%20transform=%22rotate(180,107.5,57.474999)%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+        <p>K-mappen ger</p>
+        <div data-math="block">
+    \begin{aligned}
+      F &amp;= \overline{C} + B \overline{D} \\ 
+        &amp;=\overline{\overline{\overline{C} + B \overline{D}}} &amp;&amp; \text{(Dubbel negation)} \\
+        &amp;=\overline{
+          \overline{\overline{C}} \  \overline{B \overline{D}}
+        } &amp;&amp; \text{(De Morgans lag)} \\
+        &amp;=\overline{
+          C \ \overline{B \overline{D}}
+        } &amp;&amp; \text{(Dubbelnegation)} 
+    \end{aligned}
+    </div>
+        <p>Detta ger kretsen</p>
+        <img id="node-71" height="300px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2238.174965mm%22 %20%20%20height=%2210.14999mm%22 %20%20%20viewBox=%220%200%2038.174965%2010.14999%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns:xlink=%22http://www.w3.org/1999/xlink%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%20/%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-61.400036,-121.92501)%22%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g1%22 %20%20%20%20%20%20%20transform=%22translate(1.5938439e-6,-0.13333365)%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20id=%22path67%22 %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22m%2092.500001,128.13333%20h%203.000003%20c%201.108,0%202,0.892%202,2%200,1.108%20-0.892,2%20-2,2%20h%20-3.000003%20z%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22M%2092.5,129.13333%20H%2089.500001%22 %20%20%20%20%20%20%20%20%20id=%22path68%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22M%2092.5,131.13333%20H%2089.500001%22 %20%20%20%20%20%20%20%20%20id=%22path69%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20%20%20d=%22M%2098.425004,130.13333%20H%2099.5%22 %20%20%20%20%20%20%20%20%20id=%22path70%22%20/%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:%23000000%22 %20%20%20%20%20%20%20%20%20d=%22m%2097.962114,129.59622%20c%20-0.29548,0%20-0.53711,0.24163%20-0.53711,0.53711%200,0.29548%200.24163,0.53711%200.53711,0.53711%200.29548,0%200.53711,-0.24163%200.53711,-0.53711%200,-0.29548%20-0.24163,-0.53711%20-0.53711,-0.53711%20z%20m%200,0.15039%20c%200.21442,0%200.38672,0.1723%200.38672,0.38672%200,0.21442%20-0.1723,0.38672%20-0.38672,0.38672%20-0.21442,0%20-0.38672,-0.1723%20-0.38672,-0.38672%200,-0.21442%200.1723,-0.38672%200.38672,-0.38672%20z%22 %20%20%20%20%20%20%20%20%20id=%22path71%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23g1%22 %20%20%20%20%20%20%20id=%22use1%22 %20%20%20%20%20%20%20transform=%22translate(-16.000002,-4.9999998)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0%22 %20%20%20%20%20%20%20d=%22m%2089.500003,129%20h%20-4.500001%20v%20-4%20h%20-2.298639%22 %20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22m%2067.000002,122%20v%204%20l%203,-2%20z%22 %20%20%20%20%20%20%20id=%22path47%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20d=%22m%2063.500002,124%20h%203.5%22 %20%20%20%20%20%20%20id=%22path48%22%20/%3E %20%20%20%20%3Cuse %20%20%20%20%20%20%20x=%220%22 %20%20%20%20%20%20%20y=%220%22 %20%20%20%20%20%20%20xlink:href=%22%23path71%22 %20%20%20%20%20%20%20id=%22use2%22 %20%20%20%20%20%20%20transform=%22translate(-27.499222,-6.13333)%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0%22 %20%20%20%20%20%20%20d=%22m%2070.923832,124%20h%202.576169%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2261.961243%22 %20%20%20%20%20%20%20y=%22124.75551%22 %20%20%20%20%20%20%20id=%22text2%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan2%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2261.961243%22 %20%20%20%20%20%20%20%20%20y=%22124.75551%22%3ED%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2271.961243%22 %20%20%20%20%20%20%20y=%22126.75551%22 %20%20%20%20%20%20%20id=%22text3%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan3%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2271.961243%22 %20%20%20%20%20%20%20%20%20y=%22126.75551%22%3EB%3C/tspan%3E%3C/text%3E %20%20%20%20%3Ctext %20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20style=%22font-size:2.11667px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linejoin:round%22 %20%20%20%20%20%20%20x=%2287.967964%22 %20%20%20%20%20%20%20y=%22131.75603%22 %20%20%20%20%20%20%20id=%22text4%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20id=%22tspan4%22 %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20x=%2287.967964%22 %20%20%20%20%20%20%20%20%20y=%22131.75603%22%3EC%3C/tspan%3E%3C/text%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
+    </div>
 </body>
 </html>
