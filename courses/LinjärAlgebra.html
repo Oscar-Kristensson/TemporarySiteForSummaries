@@ -931,6 +931,9 @@ table th {
             <li>
                 <p> <span data-math="inline">det(A) \neq 0 \iff A</span> är inverterbar</p>
             </li>
+            <li>
+                <p> <span data-math="inline">\lambda = 0</span> inte är ett egenvärde till <span data-math="inline">A</span></p>
+            </li>
         </ol>
     </div>
     <h2 id="node-78">Linjer, plan och avståndsproblem</h2>
@@ -1926,7 +1929,7 @@ table th {
         <p class="theorem-heading"><strong>Theorem (Spegling i linjer).</strong></p>
         <p>Låt <span data-math="inline">\vec{x}, \vec{a} \in \mathbb{R}^n</span> och <span data-math="inline">H</span> vara matrisen som speglar <span data-math="inline">\vec{x}</span> i <span data-math="inline">\vec{a}</span>. </p>
         <div data-math="block">
-    H = (2P - I) \vec{x}
+    H = 2P - I
     </div>
     </div>
     <img id="node-170" height="250px" src="data:image/svg+xml,%3Csvg %20%20%20width=%2211.397835mm%22 %20%20%20height=%2210.497971mm%22 %20%20%20viewBox=%220%200%2011.397835%2010.497971%22 %20%20%20version=%221.1%22 %20%20%20id=%22svg1%22 %20%20%20xmlns=%22http://www.w3.org/2000/svg%22 %20%20%20xmlns:svg=%22http://www.w3.org/2000/svg%22%3E %20%20%3Cdefs %20%20%20%20%20id=%22defs1%22%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22ArrowWide%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%221%22 %20%20%20%20%20%20%20markerHeight=%221%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:none;stroke:context-stroke;stroke-width:1;stroke-linecap:butt%22 %20%20%20%20%20%20%20%20%20d=%22M%203,-3%200,0%203,3%22 %20%20%20%20%20%20%20%20%20transform=%22rotate(180,0.125,0)%22 %20%20%20%20%20%20%20%20%20id=%22path11%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%20%20%3Cmarker %20%20%20%20%20%20%20style=%22overflow:visible%22 %20%20%20%20%20%20%20id=%22Triangle%22 %20%20%20%20%20%20%20refX=%220%22 %20%20%20%20%20%20%20refY=%220%22 %20%20%20%20%20%20%20orient=%22auto-start-reverse%22 %20%20%20%20%20%20%20markerWidth=%220.69999999%22 %20%20%20%20%20%20%20markerHeight=%220.69999999%22 %20%20%20%20%20%20%20viewBox=%220%200%201%201%22 %20%20%20%20%20%20%20preserveAspectRatio=%22xMidYMid%22%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20transform=%22scale(0.5)%22 %20%20%20%20%20%20%20%20%20style=%22fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt%22 %20%20%20%20%20%20%20%20%20d=%22M%205.77,0%20-2.88,5%20V%20-5%20Z%22 %20%20%20%20%20%20%20%20%20id=%22path135%22%20/%3E %20%20%20%20%3C/marker%3E %20%20%3C/defs%3E %20%20%3Cg %20%20%20%20%20id=%22layer1%22 %20%20%20%20%20transform=%22translate(-159.925,-81.047723)%22%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%234d4d4d;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.15,%200.450001;stroke-dashoffset:0%22 %20%20%20%20%20%20%20d=%22m%20162.33056,82.955237%204.98214,8.30357%22 %20%20%20%20%20%20%20id=%22path3%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23cccccc;stroke:%23ff0000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:0.15,%200.45;stroke-dashoffset:0;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20160,89.999996%207.3127,1.258812%22 %20%20%20%20%20%20%20id=%22path2%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g12%22 %20%20%20%20%20%20%20transform=%22translate(74.95823,49.575064)%22%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.32292px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;display:inline;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20x=%2287.763145%22 %20%20%20%20%20%20%20%20%20y=%2232.714115%22 %20%20%20%20%20%20%20%20%20id=%22text8%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20id=%22tspan8%22 %20%20%20%20%20%20%20%20%20%20%20style=%22font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.32292px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20%20%20x=%2287.763145%22 %20%20%20%20%20%20%20%20%20%20%20y=%2232.714115%22%3Ex%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.05;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23ArrowWide)%22 %20%20%20%20%20%20%20%20%20d=%22m%2087.330134,31.640337%20h%200.866021%22 %20%20%20%20%20%20%20%20%20id=%22path12%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23cccccc;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20160,89.999997%202.33056,-7.04476%22 %20%20%20%20%20%20%20id=%22path7%22%20/%3E %20%20%20%20%3Cpath %20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:0;marker-end:url(%23Triangle)%22 %20%20%20%20%20%20%20d=%22m%20160,89.999996%2010,-5.999998%22 %20%20%20%20%20%20%20id=%22path1%22%20/%3E %20%20%20%20%3Cg %20%20%20%20%20%20%20id=%22g4%22 %20%20%20%20%20%20%20transform=%22translate(83.078824,50.339885)%22%3E %20%20%20%20%20%20%3Ctext %20%20%20%20%20%20%20%20%20xml:space=%22preserve%22 %20%20%20%20%20%20%20%20%20style=%22font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.32292px;line-height:1.3;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-decoration-color:%23000000;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;direction:ltr;text-anchor:middle;display:inline;fill:%23000000;stroke:none;stroke-width:0.1;stroke-linecap:round;stroke-linejoin:round%22 %20%20%20%20%20%20%20%20%20x=%2287.763145%22 %20%20%20%20%20%20%20%20%20y=%2232.714115%22 %20%20%20%20%20%20%20%20%20id=%22text3%22%3E%3Ctspan %20%20%20%20%20%20%20%20%20%20%20id=%22tspan3%22 %20%20%20%20%20%20%20%20%20%20%20style=%22font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:1.32292px;font-family:'Open%20Sans';-inkscape-font-specification:'Open%20Sans';text-align:center;text-anchor:middle;fill:%23000000;stroke:none;stroke-width:0.1%22 %20%20%20%20%20%20%20%20%20%20%20x=%2287.763145%22 %20%20%20%20%20%20%20%20%20%20%20y=%2232.714115%22%3Ea%3C/tspan%3E%3C/text%3E %20%20%20%20%20%20%3Cpath %20%20%20%20%20%20%20%20%20style=%22fill:%23000000;stroke:%23000000;stroke-width:0.05;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;marker-end:url(%23ArrowWide)%22 %20%20%20%20%20%20%20%20%20d=%22m%2087.330134,31.640337%20h%200.866021%22 %20%20%20%20%20%20%20%20%20id=%22path4%22%20/%3E %20%20%20%20%3C/g%3E %20%20%20%20%3Crect %20%20%20%20%20%20%20style=%22fill:none;stroke:%23000000;stroke-width:0.15;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none%22 %20%20%20%20%20%20%20id=%22rect1%22 %20%20%20%20%20%20%20width=%220.77909833%22 %20%20%20%20%20%20%20height=%220.77909833%22 %20%20%20%20%20%20%20x=%22-96.517677%22 %20%20%20%20%20%20%20y=%22-159.49339%22 %20%20%20%20%20%20%20transform=%22rotate(149.03642)%22%20/%3E %20%20%3C/g%3E %3C/svg%3E " alt="">
@@ -1985,14 +1988,99 @@ table th {
                 <p> <span data-math="inline">|A \vec{x}| = |\vec{x}|</span> för alla <span data-math="inline">\vec{x}</span></p>
             </li>
             <li>
-                <p> kolonnerna är ortonomala</p>
+                <p> kolonnerna är ortonormala</p>
             </li>
             <li>
-                <p> raderna är ortonomala</p>
+                <p> raderna är ortonormala</p>
             </li>
         </ul>
     </div>
     <h2 id="node-182">Linjära avbildningar som ekvationer</h2>
     <p>Det går även att se på linjära avbildningar som matrisekvationer. Detta gör att det går att hitta inversa matriser genom att beräkna matrisinverser och därmed den inversa avbildning.</p>
+    <h2 id="node-183">Egenvärden och egenvektorer</h2>
+    <p>Egenvektorer är vektorer skiljda från <span data-math="inline">\vec{0}</span> som behåller sin riktning vid en linjär transformation. </p>
+    <div class="definition" id="node-184">
+        <p class="definition-heading"><strong>Definition (Egenvärden och egenvektorer).</strong></p>
+        <p>Låt <span data-math="inline">T: \mathbb{R}^n \to \mathbb{R}^n</span> vara en linjär avbildning. En egenvektor <span data-math="inline">\vec{v} \neq 0</span> är en vektor för vilken gäller att </p>
+        <div data-math="block">
+    T(\vec{v}) = \lambda \vec{v}, \lambda \in \mathbb{R}
+    </div>
+        <p>där <span data-math="inline">\lambda</span> är vektorns egenvärde.</p>
+    </div>
+    <p>Följande är exempel på projektioner med egenvektorer</p>
+    <ul>
+        <li>
+            <p> projektion på linjer</p>
+        </li>
+        <li>
+            <p> spegling i linjer</p>
+        </li>
+    </ul>
+    <p>Alla projektioner har inte egenvektorer, exempelvis har rotationer inga egenvektorer.</p>
+    <div class="theorem theorem-theorem" id="node-185">
+        <p class="theorem-heading"><strong>Theorem (Karakteristiska ekvationen).</strong></p>
+        <p><span data-math="inline">\det(\lambda I - A) = 0 \iff</span> det finns egenvektorer med egenvärdet lambda</p>
+        <p><span data-math="inline">\det(\lambda I - A)</span> utgör det <span class="concept">karakteristiska polynomet</span> av grad <span data-math="inline">n</span>.</p>
+        <div data-math="block">
+    (\lambda I - A)\vec{x} = 0
+    </div>
+        <div class="proof" id="node-186">
+            <p class="proof-heading"><em>Proof</em>.</p>
+            <div data-math="block">
+    A \vec{x} = \lambda \vec{x} \iff (\lambda I - A)\vec{x} = 0
+    </div>
+            <p>Satsen om allting</p>
+            <p>icketriviala lösningar <span data-math="inline">\iff \lambda I - A</span> är inte inverterbar <span data-math="inline">\iff det(\lambda I - A) = 0</span></p>
+        </div>
+    </div>
+    <p>Egenvektorer kan hittas med satsen ovan genom att </p>
+    <ol>
+        <li>
+            <p> lösa <span data-math="inline">\det(\lambda I - A) = 0</span> för <span data-math="inline">\lambda</span></p>
+        </li>
+        <li>
+            <p> för varje <span data-math="inline">\lambda</span> lös ekvationen <span data-math="inline">(\lambda I-A)\vec{x} = 0</span> för egenvektorn</p>
+        </li>
+    </ol>
+    <p>Om den karakteristiska ekvationen ger flera likadana röttar har de en algebraisk multiplictet större än 1. Den geometriska multipliciteten avgörs istället av antalet vektorer i spannet. </p>
+    <h3 id="node-187">Egenrummet</h3>
+    <p>Egenrummet <span data-math="inline">E_{\lambda}</span> utgörs av samtliga lösningar till <span data-math="inline">(\lambda I - A) \vec{x} = 0</span>. Notera i att både nollvektorn och egenvektorerna ingår i lösningsrummet.</p>
+    <h2 id="node-188">Triangulära matriser</h2>
+    <div class="theorem theorem-theorem" id="node-189">
+        <p class="theorem-heading"><strong>Theorem.</strong></p>
+        <p>Egenvektorer till en triangulär matris är elementen som står på diagonalen. </p>
+    </div>
+    <div class="theorem theorem-theorem" id="node-190">
+        <p class="theorem-heading"><strong>Theorem (Potenser av egenvärdes transformationer).</strong></p>
+        <p>Om <span data-math="inline">A \vec{x} = \lambda \vec{x}</span> så är <span data-math="inline">A^k \vec{x} = \lambda^k \vec{x}</span></p>
+        <p>Om <span data-math="inline">A</span> är inverterbar gäller även <span data-math="inline">A^{-1} \vec{x} = \lambda^{-1} \vec{x}</span></p>
+    </div>
+    <div class="proof" id="node-191">
+        <p class="proof-heading"><em>Proof</em>.</p>
+        <div data-math="block">
+    A^2 \vec{x} = A (A \vec{x}) = \lambda (A \vec{x}) = \lambda^2 \vec{x}
+    </div>
+        <p>osv</p>
+        <div data-math="block">
+    \vec{x} = A^{-1} A \vec{x} = A^{-1} (\lambda \vec{x})
+    </div>
+    </div>
+    <div class="theorem theorem-theorem" id="node-192">
+        <p class="theorem-heading"><strong>Theorem.</strong></p>
+        <p><span data-math="inline">A</span> är inverterbar <span data-math="inline">\iff \lambda = 0</span> inte är ett egenvärde till <span data-math="inline">A</span></p>
+    </div>
+    <div class="proof" id="node-193">
+        <p class="proof-heading"><em>Proof</em>.</p>
+        <p>0 egenvärde &lt;=&gt; A x = 0 x = 0 har icke-triviala lösningar &lt;=&gt; A ej inverterbar</p>
+    </div>
+    <p>Det kan vara värt att notera att exempelvis rotationer inte har reella egenvärden, bortsett från speglingar.</p>
+    <h3 id="node-194">Bestäm matriser från egenvektorer</h3>
+    <p>Det går att hitta matrisen till egenvektorer genom att ställa upp en matrisekvationer med samtliga kända egenvektorer på formen</p>
+    <div data-math="block">
+    A B = C
+    </div>
+    <p>där <span data-math="inline">A</span> är transformationsmatrisen, <span data-math="inline">B</span> är en matris med egenvektorer och <span data-math="inline">C</span> är en matris med de transformerade egenvektorerna.</p>
+    <h2 id="node-195">Egenvektorer ger potenser</h2>
+    <p>För att enklare kunna beräkna potenser av matriser kan formeln för potenser av egenvärdes matriser användas. Genom att skriva om en vektor som en linjärkombination av egenvektorerna kan potensen beräknas.</p>
 </body>
 </html>
